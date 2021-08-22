@@ -5,17 +5,18 @@
 
 #include "ft_vector/vector.hpp"
 
-int main() {
-	// try
-	// {
-		ft::vector<int> vec(5, 5);
-	
-	// }
-	// catch(const std::exception& e)
-	// {
-		// std::cerr << e.what() << '\n';
-	// }
-	
+#include <vector>
 
+int main() {
+	
+	ft::vector<int> vec1(5,10);
+	
+	std::vector<int> vec(5,20);
+
+	std::vector<int>::iterator it = vec.begin();
+	std::vector<int>::iterator ite = vec.end();
+
+	ft::vector<int> vec2(it, ite);
+	// ft::vector<int> vec2(vec);
 	return 0;
 }

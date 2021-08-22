@@ -1,5 +1,5 @@
-#ifndef RANDOM_ACCESS_ITERATOR_HPP
-#define RANDOM_ACCESS_ITERATOR_HPP
+#ifndef REVERSE_ITERATOR_HPP
+#define REVERSE_ITERATOR_HPP
 
 #include <iterator>
 

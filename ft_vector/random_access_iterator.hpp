@@ -20,7 +20,7 @@ namespace ft {
 
 		random_access_iterator(const random_access_iterator &rhs) { this->_ptr = rhs.getPointer(); }
 
-		virtual ~random_access_iteratorr() {}
+		virtual ~random_access_iterator() {}
 
 		It				&operator=(const It &rhs) {
 			if (this != rhs)
