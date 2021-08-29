@@ -23,7 +23,7 @@ namespace ft {
 		virtual ~random_access_iterator() {}
 
 		It				&operator=(const It &rhs) {
-			if (this != rhs)
+			if (*this != rhs)
 				this->_ptr = rhs.getPointer();
 			return *this;
 		}

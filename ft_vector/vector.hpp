@@ -233,13 +233,134 @@ namespace ft {
 		//////////////////////////MODIFIERS//////////////////////////
 
 		template <class InputIterator>
-		void assign (InputIterator first, InputIterator last) {
-			
+		void assign (InputIterator first, 
+		typename ft::enable_if< !std::numeric_limits<InputIterator>::is_integer, InputIterator >::type last) {
+			size_type dist = std::distance(first, last);
+			if (dist > _alloc_size) {
+				for (size_type i = 0; i < _size; ++i) {
+					_allocator.destroy(_ptr + i);
+				}
+				_allocator.deallocate(_ptr, _alloc_size);
+				try {
+					_ptr = _allocator.allocate(dist);
+				}
+				catch(std::exception &e) {
+					this->~vector();
+					throw std::length_error("vector");
+				}
+				_alloc_size = dist;
+			}
+			else {
+				for (size_type i = 0; i < _size; ++i)
+					_allocator.destroy(_ptr + i);
+			}
+			for (size_type i = 0; i < dist; ++i)
+				_allocator.construct(_ptr + i, *(first + i));
+			_size = dist;
 		}
 
 		void assign (size_type n, const value_type& val) {
-
+			value_type valX = val;
+			erase(begin(), end());
+			insert(begin(), n, valX);
 		}
+
+		void push_back (const value_type& val) {
+			insert(end(), val);
+		}
+
+		void pop_back() {
+			erase( end() - 1);
+		}
+
+		iterator insert (iterator position, const value_type& val) {
+			size_type Off = size() == 0 ? 0 : position - begin();
+			insert(position, (size_type)1, val);
+			return (begin() + Off);
+		}
+
+		void insert (iterator position, size_type n, const value_type& val) {
+			difference_type	dist = std::distance(this->begin(), position);
+			if ((size_type)dist > _size)
+				return ;
+			if (_size + n >= _alloc_size)
+				this->reserve(_size + n);
+
+			iterator	res = this->begin();
+			position = res + dist;
+			unsigned	i = 0;
+			while (res++ < position)
+				i++;
+			std::memmove(_ptr + i + n, _ptr + i, (size_t)(_size - i) * sizeof(value_type));
+			for (size_type j = 0; j < n; ++j)
+				_allocator.construct(_ptr + i + j, val);
+			_size += n;
+		}
+
+		template <class InputIterator>
+		void insert (iterator position, InputIterator first, 
+		typename ft::enable_if< !std::numeric_limits<InputIterator>::is_integer, InputIterator >::type last) {
+			difference_type	dist = std::distance(this->begin(), position);
+			size_type iterDistance = std::distance(first, last);
+			iterator	res = this->begin();
+
+			if ((size_type)dist > _size)
+				return ;
+			if (_size + iterDistance >= _alloc_size)
+				this->reserve(_size * 2 + iterDistance);
+			position = res + dist;
+			unsigned	i = 0;
+			while (res++ < position)
+				i++;
+			std::memmove(_ptr + i + iterDistance, _ptr + i, (size_t)(_size - i) * sizeof(value_type));
+			for (size_type j = 0; j < iterDistance; ++j)
+				_allocator.construct(_ptr + i + j, *(first + j));
+			_size += iterDistance;
+		}
+
+		iterator erase (iterator position) {
+			size_type	dist = std::distance(this->begin(), position);
+
+			if (dist > _size)
+				return (position);
+			_allocator.destroy(_ptr + dist);
+			std::memmove(_ptr + dist, _ptr + dist + 1, (size_t)(_size - dist) * sizeof(value_type));
+			_size--;
+			return (_ptr + dist);
+		}
+		
+		iterator erase (iterator first, iterator last) {
+			size_type	dist = std::distance(this->begin(), first);
+			size_type	iterDistance = std::distance(first, last);
+
+			if (dist > _size || iterDistance > _size)
+				return (first);
+			for (size_type i = 0; i < iterDistance; ++i)
+				_allocator.destroy(_ptr + dist + i);
+			std::memmove(_ptr + dist, _ptr + dist + iterDistance, (size_t)(_size - dist - iterDistance + 1) * sizeof(value_type));
+			_size -= iterDistance;
+			return (_ptr + dist);
+		}
+
+		void swap (vector& x) {
+			swap(this->_ptr, x._ptr);
+			swap(this->_size, x._size);
+			swap(this->_alloc_size, x._alloc_size);
+			swap(this->_allocator, x._allocator);
+		}
+
+		void	clear() {
+			if (_ptr == NULL)
+				return ;
+			for (size_type i = 0; i < _size; ++i)
+				_allocator.destroy(_ptr + i);
+			_size = 0;
+		}
+
+		allocator_type get_allocator() const {
+			return this->_allocator;
+		}
+
 	private:
 		pointer				_ptr;
 		size_type			_size;
@@ -282,4 +403,5 @@ namespace ft {
 		lhs.swap(rhs);
 	}
 }
+
 #endif

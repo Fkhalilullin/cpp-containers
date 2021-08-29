@@ -23,7 +23,7 @@ namespace ft {
 
 		template< class U > 
 		reverse_iterator& operator=( const reverse_iterator<U>& other ) {
-			if (this != other)
+			if (*this != other)
 				this->_it = other.getIterator();
 			return *this;
 		}
