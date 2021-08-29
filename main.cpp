@@ -39,6 +39,133 @@ void testIterator() {
 	std::cout << std::endl;
 }
 
+void testModifiers() {
+	ft::vector<int> ft_vec;
+	std::vector<int> std_vec;
+
+	ft_vec.assign(5,5);
+	std_vec.assign(5,5);
+	
+	std::cout << GREEN << "FT vector after assign: " << RESET;
+	for (size_t i = 0; i < ft_vec.size(); i++) {
+		std::cout << ft_vec[i] << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << GREEN << "STD vector after assign: " << RESET;
+	for (size_t i = 0; i < std_vec.size(); i++) {
+		std::cout << std_vec[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+
+	int val;
+	ft::vector<int> ft_buf_vec;
+	std::vector<int> std_buf_vec;
+
+	std::cout << GREEN << "Vector: " << RESET;
+	for (int i = 0; i < 10; i++) {
+		val = rand() % 10;
+		ft_buf_vec.push_back(val);
+		std_buf_vec.push_back(val);
+		std::cout << val << " ";
+	}
+	std::cout << std::endl << std::endl;
+
+	ft::vector<int>::iterator ft_it = ft_buf_vec.begin();
+	ft::vector<int>::iterator ft_ite = ft_buf_vec.end();
+	ft_vec.assign(ft_it,ft_ite);
+
+	std::vector<int>::iterator std_it = std_buf_vec.begin();
+	std::vector<int>::iterator std_ite = std_buf_vec.end();
+	std_vec.assign(std_it,std_ite);
+
+	std::cout << GREEN << "FT vector after assign: " << RESET;
+	for (size_t i = 0; i < ft_vec.size(); i++) {
+		std::cout << ft_vec[i] << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << GREEN << "STD vector after assign: " << RESET;
+	for (size_t i = 0; i < std_vec.size(); i++) {
+		std::cout << std_vec[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+
+	ft_vec.pop_back();
+	ft_vec.pop_back();
+	ft_vec.pop_back();
+	ft_vec.pop_back();
+
+	std_vec.pop_back();
+	std_vec.pop_back();
+	std_vec.pop_back();
+	std_vec.pop_back();
+
+	std::cout << GREEN << "FT vector after pop back: " << RESET;
+	for (size_t i = 0; i < ft_vec.size(); i++) {
+		std::cout << ft_vec[i] << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << GREEN << "STD vector after pop back: " << RESET;
+	for (size_t i = 0; i < std_vec.size(); i++) {
+		std::cout << std_vec[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+
+	ft_vec.insert(ft_vec.end(), 777);
+	std_vec.insert(std_vec.end(), 777);
+
+	ft_vec.insert(ft_vec.begin(),5 ,777);
+	std_vec.insert(std_vec.begin(),5 ,777);
+
+	std::cout << GREEN << "FT vector after insert: " << RESET;
+	for (size_t i = 0; i < ft_vec.size(); i++) {
+		std::cout << ft_vec[i] << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << GREEN << "STD vector after insert: " << RESET;
+	for (size_t i = 0; i < std_vec.size(); i++) {
+		std::cout << std_vec[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+
+	ft_vec.insert(ft_vec.begin(),ft_it ,ft_ite);
+	std_vec.insert(std_vec.begin(),std_it ,std_ite);
+
+	std::cout << GREEN << "FT vector after insert: " << RESET;
+	for (size_t i = 0; i < ft_vec.size(); i++) {
+		std::cout << ft_vec[i] << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << GREEN << "STD vector after insert: " << RESET;
+	for (size_t i = 0; i < std_vec.size(); i++) {
+		std::cout << std_vec[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+
+
+	// ft_vec.erase(ft_vec.begin()); ////////repair
+	ft_vec.erase(ft_it, ft_ite);
+	// std_vec.erase(std_vec.begin());
+	std_vec.erase(std_it, std_ite);
+
+	std::cout << GREEN << "FT vector after erase: " << RESET;
+	for (size_t i = 0; i < ft_vec.size(); i++) {
+		std::cout << ft_vec[i] << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << GREEN << "STD vector after erase: " << RESET;
+	for (size_t i = 0; i < std_vec.size(); i++) {
+		std::cout << std_vec[i] << " ";
+	}
+
+	std::cout << std::endl << std::endl;
+}
+
 void testReverseItetator() {
 	int val;
 	ft::vector<int> ft_vec;
@@ -112,7 +239,7 @@ void testCapacity() {
 
 	std::cout << GREEN << "FT vector capacity after reserve: " << RESET << ft_vec.capacity() << std::endl;
 	std::cout << GREEN << "STD vector capacity after reserve: " << RESET << std_vec.capacity() << std::endl << std::endl;
-	
+
 	std::cout << GREEN << "FT vector max size: " << RESET << ft_vec.max_size() << std::endl;
 	std::cout << GREEN << "STD vector max size: " << RESET << ft_vec.max_size() << std::endl;
 
@@ -184,5 +311,10 @@ int main() {
 	std::cout << RED << "<Element Access>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testElementAccess();
+
+
+	std::cout << RED << "<Modifiers>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testModifiers();
 	return 0;
 }
