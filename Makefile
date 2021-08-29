@@ -6,7 +6,7 @@ HEADER = ft_vector/reverse_iterator.hpp ft_vector/vector.hpp ft_vector/random_ac
 
 OBJS = $(SRCS:.cpp=.o)
 
-CLANG = clang++ -Wshadow -Wno-shadow -Wall -Werror -Wextra
+CLANG = clang++  -g -Wshadow -Wno-shadow -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADER)
