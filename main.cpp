@@ -147,10 +147,11 @@ void testModifiers() {
 	std::cout << std::endl << std::endl;
 
 
-	// ft_vec.erase(ft_vec.begin()); ////////repair
-	ft_vec.erase(ft_it, ft_ite);
-	// std_vec.erase(std_vec.begin());
-	std_vec.erase(std_it, std_ite);
+	ft_vec.erase(ft_vec.end() - 1);
+  	ft_vec.erase(ft_vec.begin(), ft_vec.begin() + 3);
+
+	std_vec.erase(std_vec.end() - 1);
+	std_vec.erase(std_vec.begin(), std_vec.begin() + 3);
 
 	std::cout << GREEN << "FT vector after erase: " << RESET;
 	for (size_t i = 0; i < ft_vec.size(); i++) {
@@ -162,6 +163,42 @@ void testModifiers() {
 	for (size_t i = 0; i < std_vec.size(); i++) {
 		std::cout << std_vec[i] << " ";
 	}
+
+	ft::vector<int> ft_swap_vec;
+	std::vector<int> std_swap_vec;
+
+	for (int i = 0; i < 10; i++) {
+		val = rand() & 10;
+		ft_swap_vec.push_back(val + 5);
+		std_swap_vec.push_back(val + 10);
+	}
+	std::cout << std::endl << std::endl;
+
+	std::cout << GREEN << "FT vector before swap: " << RESET;
+	for (size_t i = 0; i < ft_swap_vec.size(); i++) {
+		std::cout << ft_swap_vec[i] << " ";
+	}
+	std::cout << std::endl;
+
+	ft_vec.swap(ft_swap_vec);
+
+	std::cout << GREEN << "FT vector after swap: " << RESET;
+	for (size_t i = 0; i < ft_swap_vec.size(); i++) {
+		std::cout << ft_swap_vec[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+
+	ft_vec.clear();
+
+	std::cout << GREEN << "FT vector after clear: " << RESET;
+	for (size_t i = 0; i < ft_vec.size(); i++) {
+		std::cout << ft_vec[i] << " ";
+	}
+
+	std::cout << std::endl;
+
+	std::cout << GREEN << "FT vector empty: " << RESET << ft_vec.empty() << std::endl;
+	
 
 	std::cout << std::endl << std::endl;
 }
@@ -316,5 +353,6 @@ int main() {
 	std::cout << RED << "<Modifiers>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testModifiers();
+
 	return 0;
 }

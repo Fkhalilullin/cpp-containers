@@ -1,6 +1,7 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include "swap.hpp"
 #include "random_access_iterator.hpp"
 #include "reverse_iterator.hpp"
 #include "enable_if.hpp"
@@ -342,11 +343,11 @@ namespace ft {
 			return (_ptr + dist);
 		}
 
-		void swap (vector& x) {
-			swap(this->_ptr, x._ptr);
-			swap(this->_size, x._size);
-			swap(this->_alloc_size, x._alloc_size);
-			swap(this->_allocator, x._allocator);
+		void swap(vector& x) {
+			ft::swap(this->_ptr, x._ptr);
+			ft::swap(this->_size, x._size);
+			ft::swap(this->_alloc_size, x._alloc_size);
+			ft::swap(this->_allocator, x._allocator);
 		}
 
 		void	clear() {
@@ -399,7 +400,7 @@ namespace ft {
 	}
 
 	template<class T, class Alloc>
-	void swap(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs) {
+	void swap(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
 		lhs.swap(rhs);
 	}
 }

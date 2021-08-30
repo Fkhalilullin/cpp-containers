@@ -9,8 +9,5 @@ namespace ft {
 	struct enable_if<true, T> {
 		typedef T type;
 	};
-
-	// template <bool B, typename T = void>
-	// typedef enable_if_t = typename enable_if<B, T>::type;
 }
 #endif
