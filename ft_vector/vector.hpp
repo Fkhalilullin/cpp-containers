@@ -3,6 +3,8 @@
 
 #include "swap.hpp"
 #include "random_access_iterator.hpp"
+#include "lexicographical_compare.hpp"
+#include "equal.hpp"
 #include "reverse_iterator.hpp"
 #include "enable_if.hpp"
 #include <exception>
@@ -376,12 +378,12 @@ namespace ft {
 
 	template<class T, class Alloc>
 	bool operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs) {
-		return lhs.size() == rhs.size() && std::equal(lhs.begin(), lhs.end(), rhs.begin());
+		return lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 	}
 
 	template<class T, class Alloc>
 	bool operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs) {
-		return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
 	template<class T, class Alloc>

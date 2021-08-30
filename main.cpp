@@ -199,8 +199,7 @@ void testModifiers() {
 
 	std::cout << GREEN << "FT vector empty: " << RESET << ft_vec.empty() << std::endl;
 	
-
-	std::cout << std::endl << std::endl;
+	std::cout << RED << LINE << RESET << std::endl << std::endl;
 }
 
 void testReverseItetator() {
