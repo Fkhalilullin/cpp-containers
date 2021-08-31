@@ -286,8 +286,14 @@ namespace ft {
 			difference_type	dist = std::distance(this->begin(), position);
 			if ((size_type)dist > _size)
 				return ;
-			if (_size + n >= _alloc_size)
-				this->reserve(_size + n);
+
+			size_type new_capacity = _alloc_size * 2;
+
+			if (new_capacity < _size + n) {
+				new_capacity = _size + n;
+			}
+			if (_alloc_size == _size)
+				this->reserve(new_capacity);
 
 			iterator	res = this->begin();
 			position = res + dist;
