@@ -16,6 +16,7 @@ void testIterator() {
 	int val;
 	ft::vector<int> ft_vec;
 	std::vector<int> std_vec;
+
 	std::cout << GREEN << "Vector elem: " << RESET;
 	for (int i = 0; i < 10; i++) {
 		val = rand() % 10;
@@ -38,6 +39,34 @@ void testIterator() {
 	std::cout << std::endl << RED << LINE << RESET << std::endl;
 	std::cout << std::endl;
 }
+
+// void testConstIterator() {
+// 	int val;
+// 	ft::vector<int> ft_vec;
+// 	std::vector<int> std_vec;
+
+// 	std::cout << GREEN << "Vector elem: " << RESET;
+// 	for (int i = 0; i < 10; i++) {
+// 		val = rand() % 10;
+// 		ft_vec.push_back(val);
+// 		std_vec.push_back(val);
+// 				std::cout << val << " ";
+// 	}
+// 	std::cout << std::endl << std::endl;
+
+// 	std::cout << GREEN << "FT iterator: " << RESET;
+// 	ft::vector<int>::const_iterator ft_it = ft_vec.begin();
+// 	for (;ft_it < ft_vec.end(); ++ft_it) {
+// 		std::cout  << *ft_it << " ";
+// 	}
+// 	std::cout << GREEN << "\nSTD iterator: " << RESET;
+// 	std::vector<int>::const_iterator std_it = std_vec.begin();
+// 	for (;std_it < std_vec.end(); ++std_it) {
+// 		std::cout << *std_it << " ";
+// 	}
+// 	std::cout << std::endl << RED << LINE << RESET << std::endl;
+// 	std::cout << std::endl;
+// }
 
 void testModifiers() {
 	ft::vector<int> ft_vec;
@@ -334,7 +363,7 @@ int main() {
 	std::cout << RED << "<Iterator Test>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testIterator();
-	// testConstIterator(); // DONT WORK
+	// testConstIterator();
 	// testConstReverseIterator(); // DONT WORK
 	std::cout << RED << "<Reverse Iterator Test>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
