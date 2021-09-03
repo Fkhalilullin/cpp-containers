@@ -1,8 +1,8 @@
 NAME = test
 
-SRCS = main.cpp
+SRCS = main.cpp testContainers/vectorTest.cpp testContainers/stackTest.cpp
 
-HEADER = ft_vector/reverse_iterator.hpp ft_vector/vector.hpp ft_vector/random_access_iterator.hpp
+HEADER = vector/reverse_iterator.hpp vector/vector.hpp vector/random_access_iterator.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
