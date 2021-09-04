@@ -5,27 +5,28 @@
 #include <iterator>
 
 namespace ft {
-	template <class T>
+	template <class T, class P, class R>
 	class random_access_iterator : public std::iterator<std::random_access_iterator_tag, T> {
 	public:
 		typedef T															value_type;
-		typedef T*															pointer;
-		typedef T&															reference;
-		typedef random_access_iterator<T>									It;
+		typedef P															pointer;
+		typedef R															reference;
+		typedef random_access_iterator<T, P, R>								It;
 		typedef std::ptrdiff_t												difference_type;
-		typedef typename std::iterator<std::random_access_iterator_tag, T>	iterator_category;
+		typedef typename std::random_access_iterator_tag					iterator_category;
 
-		random_access_iterator() { this->_ptr = 0; }
+		random_access_iterator() : _ptr(0) {}
 
-		random_access_iterator(pointer ptr) { this->_ptr = ptr; }
+		random_access_iterator(pointer ptr) : _ptr(ptr) {}
 
-		random_access_iterator(const random_access_iterator &rhs) { this->_ptr = rhs.getPointer(); }
+		random_access_iterator(random_access_iterator<T, T*, T&> const &rhs) : _ptr( rhs.get_pointer() ) {}
 
 		virtual ~random_access_iterator() {}
 
 		It				&operator=(const It &rhs) {
-			if (*this != rhs)
-				this->_ptr = rhs.getPointer();
+			if (this == &rhs)
+				return *this;
+			this->_ptr = rhs._ptr;
 			return *this;
 		}
 
@@ -50,44 +51,45 @@ namespace ft {
 		pointer		_ptr;
 	};
 
-	template <class T>
-	random_access_iterator<T>	operator+
-	(typename random_access_iterator<T>::difference_type n, random_access_iterator<T> &rhs) {
+	template <class T, class P, class R>
+	random_access_iterator<T, P, R>	operator+
+	(typename random_access_iterator<T, P, R>::difference_type n, random_access_iterator<T, P, R> &rhs) {
 		return (rhs + n);	
 	}
 	
-	template <class T>
-	typename random_access_iterator<T>::difference_type operator-(const random_access_iterator<T> &lhs, 
-																const random_access_iterator<T> &rhs) {
+	template <class T, class P, class R>
+	typename random_access_iterator<T, P, R>::difference_type operator-(const random_access_iterator<T, P, R> &lhs, 
+																const random_access_iterator<T, P, R> &rhs) {
 		return (lhs.getPointer() - rhs.getPointer());
 	}
 
-	template <class T>
-	bool	operator==(const random_access_iterator<T> &lhs, const random_access_iterator<T> &rhs) {
+	template <class T, class P, class R>
+	bool	operator==(const random_access_iterator<T, P, R> &lhs, const random_access_iterator<T, P, R> &rhs) {
 		return (lhs.getPointer() == rhs.getPointer());
 	}
 	
-	template <class T>
-	bool	operator!=(const random_access_iterator<T> &lhs, const random_access_iterator<T> &rhs) {
+	template <class T, class P, class R>
+	bool	operator!=(const random_access_iterator<T, P, R> &lhs, const random_access_iterator<T, P, R> &rhs) {
 		return (!(lhs == rhs));
 	}
 
-	template <class T>
-	bool	operator>(const random_access_iterator<T> &lhs, const random_access_iterator<T> &rhs) {
+	template <class T, class P, class R>
+	bool	operator>(const random_access_iterator<T, P, R> &lhs, const random_access_iterator<T, P, R> &rhs) {
 		return (lhs.getPointer() > rhs.getPointer());
 	}
 	
-	template <class T>
-	bool	operator<(const random_access_iterator<T> &lhs, const random_access_iterator<T> &rhs) {
+	template <class T, class P, class R>
+	bool	operator<(const random_access_iterator<T, P, R> &lhs, const random_access_iterator<T, P, R> &rhs) {
 		return (lhs.getPointer() <rhs.getPointer());
 	}
 	
-	template <class T>
-	bool	operator>=(const random_access_iterator<T> &lhs, const random_access_iterator<T> &rhs) {
+	template <class T, class P, class R>
+	bool	operator>=(const random_access_iterator<T, P, R> &lhs, const random_access_iterator<T, P, R> &rhs) {
 		return (lhs > rhs || lhs == rhs);
 	}
-	template <class T>
-	bool	operator<=(const random_access_iterator<T> &lhs, const random_access_iterator<T> &rhs) {
+
+	template <class T, class P, class R>
+	bool	operator<=(const random_access_iterator<T, P, R> &lhs, const random_access_iterator<T, P, R> &rhs) {
 		return (lhs < rhs || lhs == rhs);
 	}
 }
