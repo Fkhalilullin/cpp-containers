@@ -19,7 +19,7 @@ namespace ft {
 
 		random_access_iterator(pointer ptr) : _ptr(ptr) {}
 
-		random_access_iterator(random_access_iterator<T, T*, T&> const &rhs) : _ptr( rhs.get_pointer() ) {}
+		random_access_iterator(random_access_iterator<T, T*, T&> const &rhs) : _ptr( rhs.getPointer() ) {}
 
 		virtual ~random_access_iterator() {}
 
