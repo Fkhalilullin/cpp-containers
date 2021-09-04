@@ -9,6 +9,8 @@
 #include "stack/stack.hpp"
 #include "testContainers/stackTest.hpp"
 
+#include "map/map.hpp"
+
 #include <vector>
 
 #define RESET	"\033[0m"
