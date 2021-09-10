@@ -5,6 +5,7 @@
 #include <iterator>
 #include <exception>
 #include "pair.hpp"
+#include "tree.hpp"
 #include "bidirectional_iterator.hpp"
 #include "../vector/reverse_iterator.hpp"
 

@@ -24,6 +24,7 @@ namespace ft {
 		const value_type&	top() const { return _cont.back(); }
 
 		void				push (const value_type& val) { return _cont.push_back(val); }
+		
 		void 				pop() {return _cont.pop_back(); }
 
 		/////////////////////////////////////////////////////////////
