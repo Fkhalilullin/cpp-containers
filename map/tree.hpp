@@ -185,21 +185,21 @@ private:
 				else 
 					parent->right = NULL;
 			}
-			delete v;
+			_nodeAllocator.destroy(v);
 			return ;
 		}
 		if (v->left == NULL or v->right == NULL) {
 			if (v == root) {
 				v->_value = u->_value;
 				v->left = v->right = NULL;
-				delete u;
+				_nodeAllocator.destroy(u);
 			} 
 			else {
 				if (v->isOnLeft()) 
 					parent->left = u;
 				else 
 					parent->right = u;
-				delete v;
+				_nodeAllocator.destroy(v);
 				u->parent = parent;
 				if (uvBlack) {
 					fixDoubleBlack(u);
@@ -328,8 +328,10 @@ public:
 		return temp;
 	}
  
-	void insert(int n) {
-		Node<value_type> *newNode = new Node<value_type>(n);
+	void insert(value_type n) {
+		// Node<value_type> *newNode = new Node<value_type>(n);
+		Node<value_type> *newNode = _nodeAllocator.allocate(1);
+		_nodeAllocator.construct(newNode, n);
 		if (root == NULL) {
 			newNode->color = BLACK;
 			root = newNode;
@@ -348,7 +350,7 @@ public:
 		}
 	}
  
-	void deleteByVal(int n) {
+	void deleteByVal(value_type n) {
 		if (root == NULL)
 			return;
 	
