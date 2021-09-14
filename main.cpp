@@ -10,7 +10,7 @@
 #include "testContainers/stackTest.hpp"
 
 #include "map/map.hpp"
-
+#include "testContainers/mapTest.hpp"
 
 #define RESET	"\033[0m"
 #define GREEN	"\033[32m"
@@ -60,8 +60,8 @@ int main() {
 			vectorTest();
 		else if (cont == "stack")
 			stackTest();
-		// else if (cont == "map") 
-			// mapTest();
+		else if (cont == "map") 
+			mapTest();
 		else
 			std::cout << "Wrong Input" << std::endl;
 	}

@@ -1,6 +1,6 @@
 NAME = test
 
-SRCS = main.cpp testContainers/vectorTest.cpp testContainers/stackTest.cpp
+SRCS = main.cpp testContainers/vectorTest.cpp testContainers/stackTest.cpp testContainers/mapTest.cpp
 
 HEADER = vector/reverse_iterator.hpp vector/vector.hpp vector/random_access_iterator.hpp map/pair.hpp
 
