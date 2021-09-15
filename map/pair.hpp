@@ -16,12 +16,14 @@ namespace ft {
         pair (const first_type& a, const second_type& b) : first(a), second(b) {}
 
         pair& operator= (const pair& pr) {
-            first = pr.first;
-            second = pr.second;
+            this->first = pr.getFirst();
+            this->second = pr.getSecond();
             return *this;
         }
-        
-    private:
+
+        first_type  getFirst() const { return this->first; }
+        second_type getSecond() const { return this->second; }
+
         first_type  first;
         second_type second;
     };

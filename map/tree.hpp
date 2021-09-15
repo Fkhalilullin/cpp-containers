@@ -67,6 +67,8 @@ private:
   	Node<value_type>	*root;
 	nodeAllocator		_nodeAllocator;
 
+	
+	
   	void leftRotate(Node<value_type> *x) {
 		Node<value_type> *nParent = x->right;
 	
@@ -302,11 +304,15 @@ private:
  
 public:
 
+
+
 	RBTree() { root = NULL; }
  
 	Node<value_type> *getRoot() { return root; }
-  
-	Node<value_type> *search(int n) {
+	
+	std::size_t max_size() { return _nodeAllocator.max_size(); }
+
+	Node<value_type> *search(value_type n) {
 		Node<value_type> *temp = root;
 
 		while (temp != NULL) {

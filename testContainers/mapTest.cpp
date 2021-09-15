@@ -3,31 +3,15 @@
 #include <iostream>
 
 void mapTest() {
-    RBTree<int> tree;
- 
-    tree.insert(7);
-    tree.insert(3);
-    tree.insert(18);
-    tree.insert(10);
-    tree.insert(22);
-    tree.insert(8);
-    tree.insert(11);
-    tree.insert(26);
-    tree.insert(2);
-    tree.insert(6);
-    tree.insert(13);
-    
-    tree.printInOrder();
-    tree.printLevelOrder();
-    
-    std::cout<<std::endl<<"Deleting 18, 11, 3, 10, 22"<<std::endl;
-    
-    tree.deleteByVal(18);
-    tree.deleteByVal(11);
-    tree.deleteByVal(3);
-    tree.deleteByVal(10);
-    tree.deleteByVal(22);
-    
-    tree.printInOrder();
-    tree.printLevelOrder();
+    ft::map<int,int> map;
+    ft::pair<int, int> pair_1(5, 6);
+    ft::pair<int, int> pair_2(10, 3);
+    ft::pair<int, int> pair_3(3, 9);
+    map.insert(pair_1);
+    map.insert(pair_2);
+    map.insert(pair_3);
+    ft::map<int, int>::iterator it = map.begin();
+    std::cout << it->first << " " << it->second << std::endl;
+    ++it;
+    std::cout << it->first << " " << it->second << std::endl;
 }
