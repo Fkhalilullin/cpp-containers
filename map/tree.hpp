@@ -65,7 +65,9 @@ public:
 	typedef Alloc		nodeAllocator;
 private:
   	Node<value_type>	*root;
+	Node<value_type>	*beg_node;
 	nodeAllocator		_nodeAllocator;
+	std::allocator<value_type> _allocator;
 
 	
 	
@@ -306,9 +308,12 @@ public:
 
 
 
-	RBTree() { root = NULL; }
+	RBTree() { 
+		root = NULL; 
+		beg_node = NULL; }
  
 	Node<value_type> *getRoot() { return root; }
+	Node<value_type> *getBeg() { return beg_node; }
 	
 	std::size_t max_size() { return _nodeAllocator.max_size(); }
 
@@ -337,7 +342,7 @@ public:
 	void insert(value_type n) {
 		// Node<value_type> *newNode = new Node<value_type>(n);
 		Node<value_type> *newNode = _nodeAllocator.allocate(1);
-		_nodeAllocator.construct(newNode, n);
+		_allocator.construct(&newNode->_value, n);
 		if (root == NULL) {
 			newNode->color = BLACK;
 			root = newNode;
@@ -354,6 +359,7 @@ public:
 				temp->right = newNode;
 			fixRedRed(newNode);
 		}
+		beg_node = minValue(newNode);
 	}
  
 	void deleteByVal(value_type n) {
@@ -385,6 +391,18 @@ public:
 		else
 			levelOrder(root);
 		std::cout << std::endl;
+	}
+
+	Node<value_type>* minValue(struct Node<value_type>* node)
+	{
+	struct Node<value_type>* current = node;
+	
+		/* loop down to find the leftmost leaf */
+		while (current && current->left != NULL)
+		{
+			current = current->left;
+		}
+		return(current);
 	}
 };
 

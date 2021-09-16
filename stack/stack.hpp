@@ -27,6 +27,8 @@ namespace ft {
 		
 		void 				pop() {return _cont.pop_back(); }
 
+		container_type getCont() { return this->_cont; }
+		
 		/////////////////////////////////////////////////////////////
 	private: 
 		container_type _cont;
@@ -34,32 +36,32 @@ namespace ft {
 
 	template <class T, class Cont>
   	bool operator== (const stack<T,Cont>& lhs, const stack<T,Cont>& rhs) {
-		  return lhs == rhs;
+		  return lhs.getCont() == rhs.getCont();
 	  }
 
 	template <class T, class Cont>
 	bool operator!= (const stack<T,Cont>& lhs, const stack<T,Cont>& rhs) {
-		return !(lhs == rhs);
+		return !(lhs.getCont() == rhs.getCont());
 	}
 
 	template <class T, class Cont>
 	bool operator< (const stack<T,Cont>& lhs, const stack<T,Cont>& rhs) {
-		return lhs < rhs;
+		return lhs.getCont() < rhs.getCont();
 	}
 
 	template <class T, class Cont>
 	bool operator<= (const stack<T,Cont>& lhs, const stack<T,Cont>& rhs) {
-		return lhs <= rhs;
+		return lhs.getCont() <= rhs.getCont();
 	}
 
 	template <class T, class Cont>
 	bool operator> (const stack<T,Cont>& lhs, const stack<T,Cont>& rhs) {
-		return lhs > rhs;
+		return lhs.getCont() > rhs.getCont();
 	}
 
 	template <class T, class Cont>
 	bool operator>= (const stack<T,Cont>& lhs, const stack<T,Cont>& rhs) {
-		return lhs >= rhs;
+		return lhs.getCont() >= rhs.getCont();
 	}
 }
 

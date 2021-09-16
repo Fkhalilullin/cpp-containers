@@ -14,4 +14,7 @@ void mapTest() {
     std::cout << it->first << " " << it->second << std::endl;
     ++it;
     std::cout << it->first << " " << it->second << std::endl;
+    ++it;
+    std::cout << it->first << " " << it->second << std::endl;
+
 }

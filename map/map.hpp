@@ -71,7 +71,7 @@ namespace ft {
 
 		/////////////////////////ITERATORS///////////////////////////
 
-		iterator begin() { return iterator( _tree.getRoot()); }
+		iterator begin() { return iterator( _tree.getBeg()); }
 		const_iterator begin() const;
 
 		iterator end();

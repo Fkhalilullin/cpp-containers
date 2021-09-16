@@ -33,7 +33,7 @@ namespace ft {
 		reference				operator*() { return _node->_value; }
 		pointer					operator->() { return &_node->_value; }
 
-		It&				operator++() {
+		It				operator++() {
 			Node *p;
 			if(_node->right)
 			{
@@ -54,9 +54,30 @@ namespace ft {
 			}
 			return(*this);
 		} 
-		// It&				operator--() { --this->_ptr; return *this; }
-		// It				operator++(int) { It it(*this); ++this->_ptr; return it; }
-		// It				operator--(int) { It it(*this); --this->_ptr; return it; }
+
+		It				operator--() {
+			Node *p;
+
+			if(_node->left)
+			{
+				_node = _node->left;
+				while(_node->right)
+					_node = _node->right;
+			}
+			else
+			{
+				p = _node->parent;
+				while(p && _node == p->left)
+				{
+					_node = p;
+					p = p->parent;
+				}
+				_node = _node->parent;		
+			}
+			return(*this);
+	}
+		It				operator++(int) { It it(*this); ++(*this); return it; }
+		It				operator--(int) { It it(*this); --(*this); return it; }
 
 		Node* getNode() const { return this->_node; }
 	private:
