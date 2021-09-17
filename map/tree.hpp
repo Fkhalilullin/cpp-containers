@@ -137,7 +137,7 @@ namespace ft {
 			pointer p = _allocator.allocate(1);
 			_allocator.construct(p, val);
 
-			node<value_type> *no = _nodeAllocator.allocate(1);
+			Node<value_type> *no = _nodeAllocator.allocate(1);
 			_nodeAllocator.construct(no, Node<value_type>(p));
 
 			if(!_root) {
@@ -147,9 +147,8 @@ namespace ft {
 				return (ft::make_pair(iterator(_root), true));
 			}
 
-			node<value_type> *res = _move(val);
+			Node<value_type> *res = _move(val);
 
-			// if(*res->value == val)
 			if(!_compare(*res->value, val) && !_compare(val, *res->value)) {
 				_clear(no);
 				_root->parent = _end;
@@ -170,21 +169,69 @@ namespace ft {
 			
 			return (ft::make_pair(iterator(no), true));
 		}
-		// iterator insert(iterator position, const value_type &val);
-		// template <typename InputIterator>
-		// void insert(InputIterator first, InputIterator last, 
-		// typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type* = NULL);
-		// void erase(iterator it);
-		// size_type erase(const value_type &value);
-		// void erase (iterator first, iterator last);
+
+		iterator insert(iterator position, const value_type &val) {
+			(void)position;
+			return(iterator(val).first);
+		}
+
+		template <typename InputIterator>
+		void insert(InputIterator first, InputIterator last, 
+		typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type* = NULL) {
+			for(; first != last; ++first)
+				insert(*first);
+		}
+
+		void erase(iterator it) {
+			_size--;
+			_root->parent = NULL;
+			Node<value_type> *no = _erase(it.base());
+			_balance(no);
+			if(_root)
+			{
+				_root->parent = _end;
+				_end->left = _root;
+			}
+		}
+
+		size_type erase(const value_type &value) {
+			if(!_root)
+				return(0);
+			iterator it = find(value);
+			if (it == end())
+				return (0);
+			if(*it == value)
+			{
+				erase(it);
+				return(1);
+			}
+			return (0);
+		}
+
+		void erase (iterator first, iterator last) {
+			iterator tmp;
+
+			while(first != last)
+			{
+				tmp = first;
+				first++;
+				erase(tmp);
+			}
+		}
 
 		void swap(RBTree &c) {
-			ft::swap(_compare, c._compare);
-			ft::swap(_allocator, c._allocator);
-			ft::swap(_nodeAllocator, c._nodeAllocator);
-			ft::swap(_end, c._end);
-			ft::swap(_root, c._root);
-			ft::swap(_size, c._size);
+			// ft::swap(_compare, c._compare);
+			// ft::swap(_allocator, c._allocator);
+			// ft::swap(_nodeAllocator, c._nodeAllocator);
+			// ft::swap(_end, c._end);
+			// ft::swap(_root, c._root);
+			// ft::swap(_size, c._size);
+			std::swap(_compare, c._compare);
+			std::swap(_allocator, c._allocator);
+			std::swap(_nodeAllocator, c._nodeAllocator);
+			std::swap(_end, c._end);
+			std::swap(_root, c._root);
+			std::swap(_size, c._size);
 		}
 
 		void clear() {
@@ -273,43 +320,43 @@ namespace ft {
 			return (y);
 		}
 
-		Node<value_type> *_lower_bound(value_type const &value, Node<value_type> *the_node) const {
-			if (!the_node)
+		Node<value_type> *_lower_bound(value_type const &value, Node<value_type> *node) const {
+			if (!node)
 				return(_end);
 		
-			if(_compare(*the_node->value, value))
-				return(_lower_bound(value, the_node->right));
+			if(_compare(*node->value, value))
+				return(_lower_bound(value, node->right));
 			else
 			{
-				Node<value_type> *left = _lower_bound(value, the_node->left);
-				return(left != _end ? left : the_node);
+				Node<value_type> *left = _lower_bound(value, node->left);
+				return(left != _end ? left : node);
 			}
 		}
 
-		Node<value_type> *_upper_bound(value_type const &value, Node<value_type> *the_node) const {
-			if (!the_node)
+		Node<value_type> *_upper_bound(value_type const &value, Node<value_type> *node) const {
+			if (!node)
 				return(_end);
 			
-			if(!_compare(value, *the_node->value))
-				return(_upper_bound(value, the_node->right));
+			if(!_compare(value, *node->value))
+				return(_upper_bound(value, node->right));
 			else
 			{
-				Node<value_type> *left = _upper_bound(value, the_node->left);
-				return(left != _end ? left : the_node);
+				Node<value_type> *left = _upper_bound(value, node->left);
+				return(left != _end ? left : node);
 			}
 		}
 
-		void _balance(node<value_type> *the_node) {
-			if(!the_node)
+		void _balance(Node<value_type> *node) {
+			if(!node)
 				return;
-			node<value_type> *parent = NULL;
-			node<value_type> *grandpa = NULL;
-			node<value_type> *uncle = NULL;
+			Node<value_type> *parent = NULL;
+			Node<value_type> *grandpa = NULL;
+			Node<value_type> *uncle = NULL;
 
-			while ((the_node != _root) && (the_node->color != false) &&
-				(the_node->parent->color == true)) {
-				parent = the_node->parent;
-				grandpa = the_node->parent->parent;
+			while ((node != _root) && (node->color != false) &&
+				(node->parent->color == true)) {
+				parent = node->parent;
+				grandpa = node->parent->parent;
 
 				if (parent == grandpa->left) {
 					uncle = grandpa->right;
@@ -318,17 +365,17 @@ namespace ft {
 						grandpa->color = true;
 						parent->color = false;
 						uncle->color = false;
-						the_node = grandpa;
+						node = grandpa;
 					}
 					else {
-						if (the_node == parent->right) {
+						if (node == parent->right) {
 							_rotate_left(parent);
-							the_node = parent;
-							parent = the_node->parent;
+							node = parent;
+							parent = node->parent;
 						}
 						_rotate_right(grandpa);
 						ft::swap(parent->color, grandpa->color);
-						the_node = parent;
+						node = parent;
 					}
 				}
 				else {
@@ -338,17 +385,17 @@ namespace ft {
 						grandpa->color = true;
 						parent->color = false;
 						uncle->color = false;
-						the_node = grandpa;
+						node = grandpa;
 					}
 					else {
-						if (the_node == parent->left) {
+						if (node == parent->left) {
 							_rotate_right(parent);
-							the_node = parent;
-							parent = the_node->parent;
+							node = parent;
+							parent = node->parent;
 						}
 						_rotate_left(grandpa);
 						ft::swap(parent->color, grandpa->color);
-						the_node = parent;
+						node = parent;
 					}
 				}
 			}
