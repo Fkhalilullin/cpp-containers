@@ -1,99 +1,117 @@
 #ifndef BIDIRECTIONAL_ITERATOR_HPP
 #define BIDIRECTIONAL_ITERATOR_HPP
 
-#include <iterator>
 #include "tree.hpp"
+#include <iterator>
 
 namespace ft {
-    template <class T, class Node>
-    class bidirectional_iterator : public std::iterator<std::bidirectional_iterator_tag, T> {
-    public:
-        typedef T															value_type;
-		typedef T*															pointer;
-		typedef T&															reference;
-		typedef bidirectional_iterator<T, Node>								It;
-		typedef std::ptrdiff_t												difference_type;
-		typedef typename std::bidirectional_iterator_tag					iterator_category;
+	template <typename T>
+	struct Node;
+}
 
-		bidirectional_iterator() : _node(0) {}
+namespace ft {
+	
+	template<typename T, typename Pointer, typename Reference>
+	class bidirectional_iterator {
+	public:
 
-		bidirectional_iterator(Node *node) : _node(node) {}
+		typedef std::bidirectional_iterator_tag	iterator_category;
+		typedef T								value_type;
+		typedef ptrdiff_t						difference_type;
+		typedef Pointer							pointer;
+		typedef Reference						reference;
 
-		bidirectional_iterator(bidirectional_iterator<T, Node> const &rhs) : _node ( rhs.getNode() ) {}
+	private:	
+		Node<value_type> *_point;
+	
+	public:
+	
+		bidirectional_iterator() : _point (NULL) {}
 
-		virtual ~bidirectional_iterator() {}
+		~bidirectional_iterator() {}
 
-		It	&operator=(const It &rhs) {
-			if (this == &rhs)
-				return *this;
-			_node = rhs._node;
+		explicit bidirectional_iterator(Node<value_type> *point) : _point(point) {}
+
+		bidirectional_iterator(bidirectional_iterator<T, Pointer, Reference> const &c) : _point(c.base()) {}
+
+		Node<value_type> *base() const { return _point; }
+
+		bidirectional_iterator &operator=(bidirectional_iterator<T, Pointer, Reference> const &c) {
+			_point = c.base();
 			return *this;
 		}
 
-		reference				operator*() { return _node->_value; }
-		pointer					operator->() { return &_node->_value; }
+		reference operator*() const { return *_point->value; }
 
-		It				operator++() {
-			Node *p;
-			if(_node->right)
+		pointer operator->() const { return _point->value; }
+
+		bidirectional_iterator operator++() {
+			Node<value_type> *p;
+
+			if(_point->right)
 			{
-				_node = _node->right;
-				while(_node->left)
-					_node = _node->left;
+				_point = _point->right;
+				while(_point->left)
+					_point = _point->left;
 			}
 			else
 			{
-				p = _node->parent;
-				while(p && _node == p->right)
+				p = _point->parent;
+				while(p && _point == p->right)
 				{
-					_node = p;
+					_point = p;
 					p = p->parent;
 					
 				}
-				_node = _node->parent;		
+				_point = _point->parent;		
 			}
 			return(*this);
-		} 
+		}
 
-		It				operator--() {
-			Node *p;
+		const bidirectional_iterator operator++(int) {
+			bidirectional_iterator it(*this);
+			++(*this);
+			return it;
+		}
 
-			if(_node->left)
+		bidirectional_iterator operator--() {
+			Node<value_type> *p;
+
+			if(_point->left)
 			{
-				_node = _node->left;
-				while(_node->right)
-					_node = _node->right;
+				_point = _point->left;
+				while(_point->right)
+					_point = _point->right;
 			}
 			else
 			{
-				p = _node->parent;
-				while(p && _node == p->left)
+				p = _point->parent;
+				while(p && _point == p->left)
 				{
-					_node = p;
+					_point = p;
 					p = p->parent;
 				}
-				_node = _node->parent;		
+				_point = _point->parent;		
 			}
 			return(*this);
+		}
+
+		const bidirectional_iterator operator--(int) {
+			bidirectional_iterator it(*this);
+			--(*this);
+			return (it);
+		}
+	};
+
+	template<typename T, typename FPointer, typename FReference, typename SPointer, typename SReference>
+	bool operator==(bidirectional_iterator<T, FPointer, FReference> const &first, bidirectional_iterator<T, SPointer, SReference> const &second) {
+		return(first.base() == second.base());
 	}
-		It				operator++(int) { It it(*this); ++(*this); return it; }
-		It				operator--(int) { It it(*this); --(*this); return it; }
 
-		Node* getNode() const { return this->_node; }
-	private:
-		// Tree	_ptr;
-		Node	*_node;
-    };
-
-    // template <class T, class Tree>
-	// bool	operator!=(const bidirectional_iterator<T, Tree> &lhs, const bidirectional_iterator<T, Tree> &rhs) {
-	// 	return (!(lhs == rhs));
-	// }
-
-    // template <class T, class Tree>
-	// bool	operator==(const bidirectional_iterator<T, Tree> &lhs, const bidirectional_iterator<T, Tree> &rhs) {
-	// 	return (lhs.getPointer() == rhs.getPointer());
-	// }
+	template<typename T, typename FPointer, typename FReference, typename SPointer, typename SReference>
+	bool operator!=(bidirectional_iterator<T, FPointer, FReference> const &first, bidirectional_iterator<T, SPointer, SReference> const &second) {
+		return(first.base() != second.base());
+	}
 }
 
 #endif
