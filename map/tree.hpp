@@ -4,6 +4,8 @@
 #include "bidirectional_iterator.hpp"
 #include "../vector/reverse_iterator.hpp"
 #include "../vector/swap.hpp"
+#include "is_input_iterator_tag.hpp"
+#include "../vector/enable_if.hpp"
 
 namespace ft
 {
@@ -220,18 +222,12 @@ namespace ft {
 		}
 
 		void swap(RBTree &c) {
-			// ft::swap(_compare, c._compare);
-			// ft::swap(_allocator, c._allocator);
-			// ft::swap(_nodeAllocator, c._nodeAllocator);
-			// ft::swap(_end, c._end);
-			// ft::swap(_root, c._root);
-			// ft::swap(_size, c._size);
-			std::swap(_compare, c._compare);
-			std::swap(_allocator, c._allocator);
-			std::swap(_nodeAllocator, c._nodeAllocator);
-			std::swap(_end, c._end);
-			std::swap(_root, c._root);
-			std::swap(_size, c._size);
+			ft::swap(_compare, c._compare);
+			ft::swap(_allocator, c._allocator);
+			ft::swap(_nodeAllocator, c._nodeAllocator);
+			ft::swap(_end, c._end);
+			ft::swap(_root, c._root);
+			ft::swap(_size, c._size);
 		}
 
 		void clear() {
@@ -292,7 +288,8 @@ namespace ft {
 		// Allocator:
 		allocator_type get_allocator() const { return _allocator; }
 
-	private:	
+	private:
+
 		void _clear(Node<value_type> *node) {
 			if (!node)
 				return;
@@ -402,6 +399,94 @@ namespace ft {
 			_root->color = false;
 		}
 
+		void _rotate_left(Node<value_type> *node) {
+			Node<value_type> *right = node->right;
+			node->right = right->left;
+			if (node->right)
+				node->right->parent = node;
+			right->parent = node->parent;
+			if (!node->parent)
+				_root = right;
+			else if (node == node->parent->left)
+				node->parent->left = right;
+			else
+				node->parent->right = right;
+			right->left = node;
+			node->parent = right;
+		}
+
+		void _rotate_right(Node<value_type> *node) {
+			Node<value_type> *left = node->left;
+			node->left = left->right;
+			if (node->left)
+				node->left->parent = node;
+			left->parent = node->parent;
+			if (!node->parent)
+				_root = left;
+			else if (node == node->parent->left)
+				node->parent->left = left;
+			else
+				node->parent->right = left;
+			left->right = node;
+			node->parent = left;
+		}
+
+		Node<value_type> *_erase(Node<value_type> *node) {
+			if(!node)
+				return(NULL);
+
+			Node<value_type> *tmp = NULL;
+
+			if(!node->left || !node->right)
+			{
+				if(!node->left && !node->right)
+				{
+					tmp = node->parent;
+					if(tmp == NULL){_root = NULL;}
+					else if (tmp->left == node){tmp->left = NULL;}
+					else {tmp->right = NULL;}
+				}
+				else
+				{
+					tmp = !node->right ? node->left : node->right;
+					if(node->parent == NULL)
+					{
+						_root = tmp;
+						tmp->parent = NULL;
+					}
+					else if(node->parent->left == node)
+					{
+						node->parent->left = tmp;
+						tmp->parent = node->parent;
+					}
+					else
+					{
+						node->parent->right = tmp;
+						tmp->parent = node->parent;
+					}
+				}
+				_clear_for_erase(node);
+				return (tmp);
+			}
+
+			tmp = node->left;
+			while(tmp->right)
+				tmp = tmp->right;
+
+			_allocator.destroy(node->value);
+			_allocator.construct(node->value, *tmp->value);
+			return(_erase(tmp));
+		}
+
+		void _clear_for_erase(Node<value_type> *node) {
+			if (!node)
+				return;
+
+			_allocator.destroy(node->value);
+			_allocator.deallocate(node->value, 1);
+			_nodeAllocator.destroy(node);
+			_nodeAllocator.deallocate(node, 1);
+		}
 	private:
 		compare_type				_compare;
 		allocator_type 				_allocator;
@@ -410,8 +495,6 @@ namespace ft {
 		Node<value_type>			*_root;
 		size_type					_size;
 	};
-
 }
-
 
 #endif
