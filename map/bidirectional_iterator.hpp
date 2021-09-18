@@ -3,6 +3,7 @@
 
 #include "tree.hpp"
 #include <iterator>
+#include "is_input_iterator_tag.hpp"
 
 namespace ft {
 	template <typename T>
@@ -15,7 +16,7 @@ namespace ft {
 	class bidirectional_iterator {
 	public:
 
-		typedef std::bidirectional_iterator_tag	iterator_category;
+		typedef ft::bidirectional_iterator_tag	iterator_category;
 		typedef T								value_type;
 		typedef ptrdiff_t						difference_type;
 		typedef Pointer							pointer;

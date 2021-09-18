@@ -69,7 +69,7 @@ namespace ft {
 
 		typedef typename std::size_t																	size_type;
 		typedef typename std::ptrdiff_t																	difference_type;
-		
+
 		///////////////////////MEMBER FUNCTION///////////////////////
 
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
@@ -185,7 +185,7 @@ namespace ft {
 
 		/////////////////////////////////////////////////////////////
 	private:
-		RBTree<value_type>				_tree;
+		RBTree<value_type, value_compare, allocator_type>				_tree;
 	};
 }
 
