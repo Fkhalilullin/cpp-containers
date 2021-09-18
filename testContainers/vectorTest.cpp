@@ -9,7 +9,7 @@
 #include "../vector/vector.hpp"
 #include <vector>
 
-void testIterator() {
+void testVectorIterator() {
 	int val;
 	ft::vector<int> ft_vec;
 	std::vector<int> std_vec;
@@ -19,7 +19,7 @@ void testIterator() {
 		val = rand() % 10;
 		ft_vec.push_back(val);
 		std_vec.push_back(val);
-				std::cout << val << " ";
+		std::cout << val << " ";
 	}
 	std::cout << std::endl << std::endl;
 
@@ -37,7 +37,7 @@ void testIterator() {
 	std::cout << std::endl;
 }
 
-void testModifiers() {
+void testVectorModifiers() {
 	ft::vector<int> ft_vec;
 	std::vector<int> std_vec;
 
@@ -201,7 +201,7 @@ void testModifiers() {
 	std::cout << MAGNETA<< LINE << std::endl << std::endl;
 }
 
-void testReverseItetator() {
+void testVectorReverseItetator() {
 	int val;
 	ft::vector<int> ft_vec;
 	std::vector<int> std_vec;
@@ -229,7 +229,7 @@ void testReverseItetator() {
 	std::cout << std::endl;
 }
 
-void testCapacity() {
+void testVectorCapacity() {
 	ft::vector<int> ft_vec(10, 5);
 	std::vector<int> std_vec(10, 5);
 
@@ -281,7 +281,7 @@ void testCapacity() {
 	std::cout << RED << LINE << RESET << std::endl << std::endl;
 }
 
-void testElementAccess() {
+void testVectorElementAccess() {
 	int val;
 	ft::vector<int> ft_vec;
 	std::vector<int> std_vec;

@@ -24,20 +24,20 @@ void vectorTest() {
 
 	std::cout << RED << "<Iterator Test>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
-	testIterator();
+	testVectorIterator();
 
 	std::cout << RED << "<Capacity Test>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
-	testCapacity();
+	testVectorCapacity();
 
 	std::cout << RED << "<Element Access>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
-	testElementAccess();
+	testVectorElementAccess();
 
 
 	std::cout << RED << "<Modifiers>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
-	testModifiers();
+	testVectorModifiers();
 }
 
 void stackTest() {
@@ -48,6 +48,14 @@ void stackTest() {
 	testMemberFunction();
 }
 
+void mapTest() {
+	std::cout << MAGENTA << "[MAP TEST]" << RESET << std::endl;
+	std::cout << MAGENTA << LINE  << std::endl;
+
+	std::cout << RED << "<Iterator Test>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testMapIterator();
+}
 
 int main() {
 	srand(time(NULL));

@@ -6,6 +6,7 @@
 #include "../vector/swap.hpp"
 #include "is_input_iterator_tag.hpp"
 #include "../vector/enable_if.hpp"
+#include "map.hpp"
 
 namespace ft
 {
@@ -14,6 +15,12 @@ namespace ft
 
 	template <typename T, typename Compare, typename Alloc, typename NAlloc>
 	class RBTree;
+
+	template <class Arg1, class Arg2, class Result>
+  	struct binary_function;
+
+	template <class T> 
+	struct less;
 }
 
 namespace ft {
@@ -26,14 +33,14 @@ namespace ft {
 		Node	*right;
 		Node	*parent;
 
-		Node(const T *value) {
+		Node(T *value) {
 			this->value = value;
 			left = right = parent = NULL;
 			this->color = true;
 		}
 	};
 
-	template <typename T, typename Compare = std::less<T>, typename Alloc = std::allocator<T>, typename NAlloc = std::allocator<Node<T> > >
+	template <typename T, typename Compare = ft::less<T>, typename Alloc = std::allocator<T>, typename NAlloc = std::allocator<Node<T> > >
 	class RBTree {
 	public:
 		typedef T															value_type;
@@ -51,7 +58,7 @@ namespace ft {
 		typedef size_t														size_type;
 
 	public:
-		explicit RBTree(const compare_type comp = Compare(), const allocator_type &alloc = Alloc(), const nalloc_type &nalloc = NAlloc()) :
+		RBTree(const compare_type comp = Compare(), const allocator_type &alloc = Alloc(), const nalloc_type &nalloc = NAlloc()) :
 		_compare(comp), _allocator(alloc), _nodeAllocator(nalloc), _root(NULL), _size(0) {
 			_end = _nodeAllocator.allocate(1);
 			_nodeAllocator.construct(_end, Node<value_type>(NULL));
@@ -304,6 +311,7 @@ namespace ft {
 		Node<value_type> *_move(const_reference val) const {
 			Node<value_type> *x = _root;
 			Node<value_type> *y = NULL;
+			
 			while(x)
 			{
 				y = x;
