@@ -70,11 +70,11 @@ namespace ft {
 			_nodeAllocator.deallocate(_end, 1);
 		}
 
-		// RBTree(const RBTree &c) : _compare(c._compare), _allocator(c._allocator), _nodeAllocator(c._nodeAllocator), _root(NULL),  _size(0) {
-		// 	_end = _nodeAllocator.allocate(1);
-		// 	_nodeAllocator.construct(_end, Node<value_type>(NULL));
-		// 	insert(c.begin(), c.end());
-		// }
+		RBTree(const RBTree &c) : _compare(c._compare), _allocator(c._allocator), _nodeAllocator(c._nodeAllocator), _root(NULL),  _size(0) {
+			_end = _nodeAllocator.allocate(1);
+			_nodeAllocator.construct(_end, Node<value_type>(NULL));
+			insert(c.begin(), c.end());
+		}
 
 		RBTree &operator=(const RBTree &c) {
 			if(this == &c)
@@ -86,14 +86,14 @@ namespace ft {
 			return(*this);
 		}
 
-		// template <class InputIterator>
-  		// RBTree(InputIterator first, InputIterator last, const compare_type comp = Compare(), 
-	  	// 		const allocator_type &alloc = Alloc(), const nalloc_type &nalloc = NAlloc()) :
-		// _compare(comp), _allocator(alloc), _nodeAllocator(nalloc), _root(NULL), _size(0) {
-		// 	_end = _nodeAllocator.allocate(1);
-		// 	_nodeAllocator.construct(_end, Node<value_type>(NULL));
-		// 	insert(first, last);
-		// }
+		template <class InputIterator>
+  		RBTree(InputIterator first, InputIterator last, const compare_type comp = Compare(), 
+	  			const allocator_type &alloc = Alloc(), const nalloc_type &nalloc = NAlloc()) :
+		_compare(comp), _allocator(alloc), _nodeAllocator(nalloc), _root(NULL), _size(0) {
+			_end = _nodeAllocator.allocate(1);
+			_nodeAllocator.construct(_end, Node<value_type>(NULL));
+			insert(first, last);
+		}
 
 		// Iterators:
 		iterator		begin() {
@@ -185,8 +185,8 @@ namespace ft {
 		}
 
 		template <typename InputIterator>
-		void insert(InputIterator first, InputIterator last, 
-		typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type*) 
+		void insert(InputIterator first, InputIterator last) 
+		// typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type*) 
 		{
 			for(; first != last; ++first)
 				insert(*first);
