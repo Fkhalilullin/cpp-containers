@@ -35,7 +35,7 @@ void testMapIterator()
 	for (;ft_rit != ft_map.rend(); ++ft_rit) {
 		std::cout << "[" << ft_rit->first << "]" << " " << ft_rit->second << " | ";
 	}
-	std::cout << GREEN << "\nSTD resverse iterator: " << RESET;
+	std::cout << GREEN << "\nSTD reverse iterator: " << RESET;
 	std::map<int, int>::reverse_iterator std_rit = std_map.rbegin();
 	for (;std_rit != std_map.rend(); ++std_rit) {
 		std::cout << "[" << std_rit->first << "]" << " " << std_rit->second << " | ";

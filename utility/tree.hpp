@@ -6,22 +6,7 @@
 #include "../iterator/is_input_iterator_tag.hpp"
 #include "../utility/swap.hpp"
 #include "../utility/enable_if.hpp"
-#include "../map/map.hpp"
-
-namespace ft
-{
-	template <typename T>
-	struct Node;
-
-	template <typename T, typename Compare, typename Alloc, typename NAlloc>
-	class RBTree;
-
-	template <class Arg1, class Arg2, class Result>
-  	struct binary_function;
-
-	template <class T> 
-	struct less;
-}
+#include "../utility/less.hpp"
 
 namespace ft {
 
