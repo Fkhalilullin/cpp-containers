@@ -1,12 +1,7 @@
-#include "../map/map.hpp"
 #include <map>
 #include <iostream>
-
-#define RESET	"\033[0m"
-#define GREEN	"\033[32m"
-#define RED		"\033[31m"
-#define MAGENTA "\033[35m"
-#define LINE	"-----------------------------------------------"
+#include "../map/map.hpp"
+#include "mapTest.hpp"
 
 void testMapIterator() {
     int val;
@@ -21,8 +16,8 @@ void testMapIterator() {
         std::cout << val << " ";
     }
     std::cout << std::endl << std::endl;
-
-    std::cout << GREEN << "FT iterator:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+    std::cout << GREEN << "FT  iterator: " << RESET;
 	ft::map<int, int>::iterator ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -33,8 +28,8 @@ void testMapIterator() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
-    std::cout << GREEN << "FT reverse iterator:   " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+    std::cout << GREEN << "FT  reverse iterator: " << RESET;
 	ft::map<int, int>::reverse_iterator ft_rit = ft_map.rbegin();
 	for (;ft_rit != ft_map.rend(); ++ft_rit) {
 		std::cout << "[" << ft_rit->first << "]" << " " << ft_rit->second << " | ";
@@ -44,6 +39,7 @@ void testMapIterator() {
 	for (;std_rit != std_map.rend(); ++std_rit) {
 		std::cout << "[" << std_rit->first << "]" << " " << std_rit->second << " | ";
 	}
+	/////////////////////////////////////////////////////////////////////////
 	std::cout << std::endl << RED << LINE << RESET << std::endl;
 	std::cout << std::endl;
 }
@@ -53,10 +49,10 @@ void testMapCapacity() {
     std::map<int, int> std_map;
     ft::map<int, int> ft_map;
 
-    std::cout << GREEN << "FT map empty: " << RESET << ft_map.empty() << std::endl;
+    std::cout << GREEN << "FT  map empty: " << RESET << ft_map.empty() << std::endl;
 	std::cout << GREEN << "STD map empty: " << RESET << std_map.empty() << std::endl << std::endl;
 
-	std::cout << GREEN << "FT map size: " << RESET << ft_map.size() << std::endl;
+	std::cout << GREEN << "FT  map size: " << RESET << ft_map.size() << std::endl;
 	std::cout << GREEN << "STD map size: " << RESET << std_map.size() << std::endl << std::endl;
 
     std::cout << GREEN << "Map elem: " << RESET;
@@ -68,10 +64,10 @@ void testMapCapacity() {
     }
     std::cout << std::endl << std::endl;
 
-    std::cout << GREEN << "FT map size: " << RESET << ft_map.size() << std::endl;
+    std::cout << GREEN << "FT  map size: " << RESET << ft_map.size() << std::endl;
 	std::cout << GREEN << "STD map size: " << RESET << std_map.size() << std::endl << std::endl;
 
-    std::cout << GREEN << "FT map max size: " << RESET << ft_map.max_size() << std::endl;
+    std::cout << GREEN << "FT  map max size: " << RESET << ft_map.max_size() << std::endl;
 	std::cout << GREEN << "STD map max size: " << RESET << ft_map.max_size() << std::endl;
 
 	std::cout << RED << LINE << RESET << std::endl << std::endl;
@@ -90,8 +86,8 @@ void testMapElementAccess() {
         std::cout << val << " ";
     }
 	std::cout << std::endl << std::endl;
-
-	std::cout << GREEN << "FT map elements:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map elements: " << RESET;
 	ft::map<int, int>::iterator ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -102,7 +98,7 @@ void testMapElementAccess() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
     int j = 10;
     for (int i = 0; i <= 5; ++i) {
         ft_map[i] = ft_map[j];
@@ -112,8 +108,8 @@ void testMapElementAccess() {
 
     ft_it = ft_map.begin();
     std_it = std_map.begin();
-
-    std::cout << GREEN << "FT map elements:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+    std::cout << GREEN << "FT  map elements: " << RESET;
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
 	}
@@ -122,7 +118,7 @@ void testMapElementAccess() {
 	for (;std_it != std_map.end(); ++std_it) {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
-    
+    /////////////////////////////////////////////////////////////////////////
     std::cout << std::endl << RED << LINE << RESET << std::endl;
 	std::cout << std::endl;
 }
@@ -140,8 +136,8 @@ void testMapModifiers() {
         std::cout << val << " ";
     }
 	std::cout << std::endl << std::endl;
-
-	std::cout << GREEN << "FT map elements:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map elements: " << RESET;
 	ft::map<int, int>::iterator ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -152,11 +148,11 @@ void testMapModifiers() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	ft_map.insert(ft_map.begin(), ft::pair<int,int>(4,777));
 	std_map.insert(std_map.begin(), std::pair<int,int>(4,777));
-
-	std::cout << GREEN << "FT map elements:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map elements: " << RESET;
 	ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -167,7 +163,7 @@ void testMapModifiers() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	std::map<int, int> std_map1;
 	ft::map<int, int> ft_map1;
 
@@ -182,8 +178,8 @@ void testMapModifiers() {
 
 	ft_map.insert(ft_map1.begin(), ft_map1.end());
 	std_map.insert(std_map1.begin(), std_map1.end());
-
-	std::cout << GREEN << "FT map elements:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map elements: " << RESET;
 	ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -194,11 +190,11 @@ void testMapModifiers() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	ft_map.erase(ft_map.begin());
 	std_map.erase(std_map.begin());
 
-	std::cout << GREEN << "FT map elements after erase:  " << RESET;
+	std::cout << GREEN << "FT  map elements after erase: " << RESET;
 	ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -209,11 +205,11 @@ void testMapModifiers() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	ft_map.erase(5);
 	std_map.erase(5);
-
-	std::cout << GREEN << "FT map elements after erase:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map elements after erase: " << RESET;
 	ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -224,14 +220,14 @@ void testMapModifiers() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	ft_it = ft_map.find(8);
 	std_it = std_map.find(8);
 
 	ft_map.erase(ft_map.begin(), ft_it);
 	std_map.erase(std_map.begin(), std_it);
-	
-	std::cout << GREEN << "FT map elements after erase:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map elements after erase: " << RESET;
 	ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -243,11 +239,11 @@ void testMapModifiers() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	ft_map.swap(ft_map1);
 	std_map.swap(std_map1);
 
-	std::cout << GREEN << "FT map elements after swap:  " << RESET;
+	std::cout << GREEN << "FT  map elements after swap: " << RESET;
 	ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -259,12 +255,11 @@ void testMapModifiers() {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	ft_map.clear();
 	std_map.clear();
 
-
-	std::cout << GREEN << "FT map elements after clear:  " << RESET;
+	std::cout << GREEN << "FT  map elements after clear: " << RESET;
 	ft_it = ft_map.begin();
 	for (;ft_it != ft_map.end(); ++ft_it) {
 		std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
@@ -275,7 +270,8 @@ void testMapModifiers() {
 	for (;std_it != std_map.end(); ++std_it) {
 		std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 	}
-	std::cout << std::endl << std::endl;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << std::endl << RED << LINE << RESET << std::endl << std::endl;
 }
 
 void testObserversModifiers() {
@@ -297,20 +293,21 @@ void testObserversModifiers() {
 
 		char ft_highest = ft_map.rbegin()->first;    
 		char std_highest = std_map.rbegin()->first;   
-
-		std::cout << GREEN << "FT map elements:   " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+		std::cout << GREEN << "FT  map elements: " << RESET;
 		ft::map<char,int>::iterator ft_it = ft_map.begin();
 		do {
 			std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << " | ";
 		} while ( ft_comp((*ft_it++).first, ft_highest) );
 		std::cout << std::endl;
 
-		std::cout << GREEN << "STD map elements:  " << RESET;
+		std::cout << GREEN << "STD map elements: " << RESET;
 		std::map<char,int>::iterator std_it = std_map.begin();
 		do {
 			std::cout << "[" << std_it->first << "]" << " " << std_it->second << " | ";
 		} while ( std_comp((*std_it++).first, std_highest) );
 		std::cout << std::endl << std::endl;
+	/////////////////////////////////////////////////////////////////////////
 	}
 	{
 		ft::map<char,int> ft_map;
@@ -326,7 +323,7 @@ void testObserversModifiers() {
 
 		ft::pair<char,int> ft_highest = *ft_map.rbegin();
 		std::pair<char,int> std_highest = *std_map.rbegin();
-
+	/////////////////////////////////////////////////////////////////////////
 		std::cout << GREEN << "FT map elements:   " << RESET;
 		ft::map<char,int>::iterator ft_it = ft_map.begin();
 		do {
@@ -341,6 +338,7 @@ void testObserversModifiers() {
 		} while ( std_map.value_comp()(*std_it++, std_highest) );
 		std::cout << std::endl;
 	}
+	/////////////////////////////////////////////////////////////////////////
 	std::cout << RED << LINE << RESET << std::endl << std::endl;
 }
 
@@ -357,49 +355,48 @@ void testOperationsModifiers() {
         std::cout << val << " ";
     }
 	std::cout << std::endl << std::endl;
-
-	std::cout << GREEN << "FT map find elements:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map find elements: " << RESET;
 	for(int i = 0; i <= 5; i++) {
 		if (ft_map.count(i))
 			std::cout << "[" << ft_map.find(i)->first << "]" << " " << ft_map.find(i)->second << " | ";
 	}
 	std::cout << std::endl;
 
-	std::cout << GREEN << "STD map find elements:  " << RESET;
+	std::cout << GREEN << "STD map find elements: " << RESET;
 	for(int i = 0; i <= 5; i++) {
 		if (std_map.count(i))
 			std::cout << "[" << std_map.find(i)->first << "]" << " " << std_map.find(i)->second << " | ";
 	}
 	std::cout << std::endl << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	ft::map<int, int>::iterator ft_it = ft_map.begin();
-	std::cout << GREEN << "FT map lower_bound:  " << RESET;
+	std::cout << GREEN << "FT  map lower_bound: " << RESET;
 	ft_it = ft_map.lower_bound(4);
 	std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << std::endl;
 
 	std::map<int, int>::iterator std_it = std_map.begin();
-	std::cout << GREEN << "STD map lower_bound:  " << RESET;
+	std::cout << GREEN << "STD map lower_bound: " << RESET;
 	std_it = std_map.lower_bound(4);
 	std::cout << "[" << std_it->first << "]" << " " << std_it->second << std::endl<<std::endl;
-
-
-	std::cout << GREEN << "FT map upper_bound:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map upper_bound: " << RESET;
 	ft_it = ft_map.upper_bound(4);
 	std::cout << "[" << ft_it->first << "]" << " " << ft_it->second << std::endl;
 
-	std::cout << GREEN << "STD map upper_bound:  " << RESET;
+	std::cout << GREEN << "STD map upper_bound: " << RESET;
 	std_it = std_map.upper_bound(4);
 	std::cout << "[" << std_it->first << "]" << " " << std_it->second << std::endl;
 	std::cout << std::endl;
-
-	std::cout << GREEN << "FT map equal_range:  " << RESET;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << GREEN << "FT  map equal_range: " << RESET;
 	ft::pair<ft::map<int,int>::iterator, ft::map<int,int>::iterator> ft_ret = ft_map.equal_range(3);
 	std::cout << "[" << ft_ret.first->first << "]" << " " << ft_ret.second->second << std::endl;
 
-	std::cout << GREEN << "STD map equal_range:  " << RESET;
+	std::cout << GREEN << "STD map equal_range: " << RESET;
 	std::pair<std::map<int,int>::iterator, std::map<int,int>::iterator> std_ret = std_map.equal_range(3);
 	std::cout << "[" << ft_ret.first->first << "]" << " " << std_ret.second->second << std::endl;
-
+	/////////////////////////////////////////////////////////////////////////
 	std::cout << RED << LINE << RESET << std::endl;
 	std::cout << MAGENTA<< LINE << std::endl << std::endl;
 }
