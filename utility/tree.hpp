@@ -1,12 +1,12 @@
 #ifndef TREE_HPP
 #define TREE_HPP
 
-#include "bidirectional_iterator.hpp"
-#include "../vector/reverse_iterator.hpp"
-#include "../vector/swap.hpp"
-#include "is_input_iterator_tag.hpp"
-#include "../vector/enable_if.hpp"
-#include "map.hpp"
+#include "../iterator/bidirectional_iterator.hpp"
+#include "../iterator/reverse_iterator.hpp"
+#include "../iterator/is_input_iterator_tag.hpp"
+#include "../utility/swap.hpp"
+#include "../utility/enable_if.hpp"
+#include "../map/map.hpp"
 
 namespace ft
 {
@@ -64,19 +64,22 @@ namespace ft {
 			_nodeAllocator.construct(_end, Node<value_type>(NULL));
 		}	
 
-		~RBTree() {
+		~RBTree() 
+		{
 			clear();
 			_nodeAllocator.destroy(_end);
 			_nodeAllocator.deallocate(_end, 1);
 		}
 
-		RBTree(const RBTree &c) : _compare(c._compare), _allocator(c._allocator), _nodeAllocator(c._nodeAllocator), _root(NULL),  _size(0) {
+		RBTree(const RBTree &c) : _compare(c._compare), _allocator(c._allocator), _nodeAllocator(c._nodeAllocator), _root(NULL),  _size(0) 
+		{
 			_end = _nodeAllocator.allocate(1);
 			_nodeAllocator.construct(_end, Node<value_type>(NULL));
 			insert(c.begin(), c.end());
 		}
 
-		RBTree &operator=(const RBTree &c) {
+		RBTree &operator=(const RBTree &c) 
+		{
 			if(this == &c)
 				return (*this);
 			_compare = c._compare;
@@ -87,16 +90,16 @@ namespace ft {
 		}
 
 		template <class InputIterator>
-  		RBTree(InputIterator first, InputIterator last, const compare_type comp = Compare(), 
-	  			const allocator_type &alloc = Alloc(), const nalloc_type &nalloc = NAlloc()) :
-		_compare(comp), _allocator(alloc), _nodeAllocator(nalloc), _root(NULL), _size(0) {
+  		RBTree(InputIterator first, InputIterator last, const compare_type comp = Compare(), const allocator_type &alloc = Alloc(), const nalloc_type &nalloc = NAlloc()) :
+		_compare(comp), _allocator(alloc), _nodeAllocator(nalloc), _root(NULL), _size(0) 
+		{
 			_end = _nodeAllocator.allocate(1);
 			_nodeAllocator.construct(_end, Node<value_type>(NULL));
 			insert(first, last);
 		}
 
-		// Iterators:
-		iterator		begin() {
+		iterator		begin() 
+		{
 			if(!_root || !_size)
 				return (end());
 			Node<value_type> *tmp = _root;
@@ -105,7 +108,8 @@ namespace ft {
 			return(iterator(tmp));
 		}
 
-		const_iterator	begin() const {
+		const_iterator	begin() const 
+		{
 			if(!_root || !_size)
 				return (end());
 			Node<value_type> *tmp = _root;
@@ -123,8 +127,8 @@ namespace ft {
 		reverse_iterator		rend() { return(reverse_iterator(begin())); }
 		const_reverse_iterator	rend() const { return(const_reverse_iterator(begin())); }
 
-		// Capacity:
-		bool empty () const {
+		bool empty () const 
+		{
 			if (_size == 0)
 				return true;
 			return false;
@@ -132,14 +136,15 @@ namespace ft {
 
 		size_type size() const { return _size; }
 
-		size_type max_size() const {
+		size_type max_size() const 
+		{
 			size_type first = _allocator.max_size();
 			size_type second = _nodeAllocator.max_size();
 			return first < second ? first : second;
 		}
 
-		//Modifiers:
-		pair<iterator, bool> insert(const_reference val) {
+		pair<iterator, bool> insert(const_reference val) 
+		{
 			if(_root)
 				_root->parent = NULL;
 
@@ -179,7 +184,8 @@ namespace ft {
 			return (ft::make_pair(iterator(no), true));
 		}
 
-		iterator insert(iterator position, const value_type &val) {
+		iterator insert(iterator position, const value_type &val) 
+		{
 			(void)position;
 			return insert(val).first;
 		}
@@ -192,7 +198,8 @@ namespace ft {
 				insert(*first);
 		}
 
-		void erase(iterator it) {
+		void erase(iterator it) 
+		{
 			_size--;
 			_root->parent = NULL;
 			Node<value_type> *no = _erase(it.base());
@@ -204,7 +211,8 @@ namespace ft {
 			}
 		}
 
-		size_type erase(const value_type &value) {
+		size_type erase(const value_type &value) 
+		{
 			if(!_root)
 				return(0);
 			iterator it = find(value);
@@ -218,7 +226,8 @@ namespace ft {
 			return (0);
 		}
 
-		void erase (iterator first, iterator last) {
+		void erase (iterator first, iterator last) 
+		{
 			iterator tmp;
 
 			while(first != last)
@@ -229,7 +238,8 @@ namespace ft {
 			}
 		}
 
-		void swap(RBTree &c) {
+		void swap(RBTree &c) 
+		{
 			ft::swap(_compare, c._compare);
 			ft::swap(_allocator, c._allocator);
 			ft::swap(_nodeAllocator, c._nodeAllocator);
@@ -246,11 +256,10 @@ namespace ft {
 			_root = NULL;
 		}
 
-		// Observers:
 		compare_type	value_comp() const { return _compare; }
 
-		// Operations:
-		iterator		find(const value_type &value) {
+		iterator		find(const value_type &value) 
+		{
 			Node<value_type> *tmp = _move(value);
 
 			if(!_compare(*tmp->value, value) && !_compare(value, *tmp->value))
@@ -258,7 +267,8 @@ namespace ft {
 			return(end());
 		}
 
-		const_iterator	find(const value_type &value) const {
+		const_iterator	find(const value_type &value) const 
+		{
 			Node<value_type> *tmp = _move(value);
 
 			if(!_compare(*tmp->value, value) && !_compare(value, *tmp->value))
@@ -266,7 +276,8 @@ namespace ft {
 			return(end());
 		}
 
-		size_type 		count(const value_type &value) const {
+		size_type 		count(const value_type &value) const 
+		{
 			if (this->find(value) == this->end())
 				return (0);
 			return (1);
@@ -278,24 +289,26 @@ namespace ft {
 		iterator		upper_bound(const value_type &value) { return iterator(_upper_bound(value, _root)); }
 		const_iterator	upper_bound(const value_type &value) const { return const_iterator(_upper_bound(value, _root)); }
 
-		pair<const_iterator,const_iterator> equal_range(const value_type &value) const {
+		pair<const_iterator,const_iterator> equal_range(const value_type &value) const 
+		{
 			if (this->lower_bound(value) == this->end() && this->upper_bound(value) == this->end())
 				return (ft::make_pair<const_iterator, const_iterator>(this->begin(), this->begin()));
 			return (ft::make_pair<const_iterator, const_iterator>(this->lower_bound(value), this->upper_bound(value)));
 		}
 
-		pair<iterator,iterator>             equal_range(const value_type &value) {
+		pair<iterator,iterator>             equal_range(const value_type &value) 
+		{
 			if (this->lower_bound(value) == this->end() && this->upper_bound(value) == this->end())
 				return (ft::make_pair<iterator, iterator>(this->begin(), this->begin()));
 			return (ft::make_pair<iterator, iterator>(this->lower_bound(value), this->upper_bound(value)));
 		}
 
-		// Allocator:
 		allocator_type get_allocator() const { return _allocator; }
 
 	private:
 
-		void _clear(Node<value_type> *node) {
+		void _clear(Node<value_type> *node) 
+		{
 			if (!node)
 				return;
 			_clear(node->right);
@@ -306,7 +319,8 @@ namespace ft {
 			_nodeAllocator.deallocate(node, 1);
 		}
 
-		Node<value_type> *_move(const_reference val) const {
+		Node<value_type> *_move(const_reference val) const 
+		{
 			Node<value_type> *x = _root;
 			Node<value_type> *y = NULL;
 			
@@ -323,7 +337,8 @@ namespace ft {
 			return (y);
 		}
 
-		Node<value_type> *_lower_bound(value_type const &value, Node<value_type> *node) const {
+		Node<value_type> *_lower_bound(value_type const &value, Node<value_type> *node) const 
+		{
 			if (!node)
 				return(_end);
 		
@@ -336,7 +351,8 @@ namespace ft {
 			}
 		}
 
-		Node<value_type> *_upper_bound(value_type const &value, Node<value_type> *node) const {
+		Node<value_type> *_upper_bound(value_type const &value, Node<value_type> *node) const 
+		{
 			if (!node)
 				return(_end);
 			
@@ -349,7 +365,8 @@ namespace ft {
 			}
 		}
 
-		void _balance(Node<value_type> *node) {
+		void _balance(Node<value_type> *node) 
+		{
 			if(!node)
 				return;
 			Node<value_type> *parent = NULL;
@@ -405,7 +422,8 @@ namespace ft {
 			_root->color = false;
 		}
 
-		void _rotate_left(Node<value_type> *node) {
+		void _rotate_left(Node<value_type> *node) 
+		{
 			Node<value_type> *right = node->right;
 			node->right = right->left;
 			if (node->right)
@@ -421,7 +439,8 @@ namespace ft {
 			node->parent = right;
 		}
 
-		void _rotate_right(Node<value_type> *node) {
+		void _rotate_right(Node<value_type> *node) 
+		{
 			Node<value_type> *left = node->left;
 			node->left = left->right;
 			if (node->left)
@@ -437,7 +456,8 @@ namespace ft {
 			node->parent = left;
 		}
 
-		Node<value_type> *_erase(Node<value_type> *node) {
+		Node<value_type> *_erase(Node<value_type> *node) 
+		{
 			if(!node)
 				return(NULL);
 
@@ -484,7 +504,8 @@ namespace ft {
 			return(_erase(tmp));
 		}
 
-		void _clear_for_erase(Node<value_type> *node) {
+		void _clear_for_erase(Node<value_type> *node) 
+		{
 			if (!node)
 				return;
 

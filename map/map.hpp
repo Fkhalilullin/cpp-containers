@@ -4,16 +4,15 @@
 #include <functional>
 #include <iterator>
 #include <exception>
-#include "pair.hpp"
-#include "tree.hpp"
-#include "bidirectional_iterator.hpp"
-#include "../vector/reverse_iterator.hpp"
-#include "is_input_iterator_tag.hpp"
+#include "../utility/pair.hpp"
+#include "../utility/tree.hpp"
+#include "../iterator/bidirectional_iterator.hpp"
+#include "../iterator/reverse_iterator.hpp"
+#include "../iterator/is_input_iterator_tag.hpp"
 
 
 namespace ft
 {
-
 	template <class Arg1, class Arg2, class Result>
   	struct binary_function
 	{
@@ -29,13 +28,12 @@ namespace ft
 		{
 			return (x < y);
 		}
-};
+	};
+} 
 
-} // ft
 
-
-namespace ft {
-
+namespace ft 
+{
 	template <class Key, class T, class Compare = ft::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
 	class map {
 	public:
@@ -85,21 +83,23 @@ namespace ft {
 		_tree(RBTree<value_type, value_compare, allocator_type>(value_compare(comp), alloc)) {}
 
 		template <class InputIterator>
-  		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), 
-		  	const allocator_type& alloc = allocator_type(), //
+  		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(), 
 	  	typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type* = NULL) :
-		_tree(RBTree<value_type, value_compare, allocator_type>(value_compare(comp), alloc)) { 
+		_tree(RBTree<value_type, value_compare, allocator_type>(value_compare(comp), alloc)) 
+		{ 
 			insert(first, last); 
 		}
 
 		map(const map& x) :
-		_tree(RBTree<value_type, value_compare, allocator_type>(value_compare(Compare()), Alloc())) {
+		_tree(RBTree<value_type, value_compare, allocator_type>(value_compare(Compare()), Alloc())) 
+		{
 			_tree.insert(x._tree.begin(), x._tree.end());
 		}
 
 		~map() {}
 
-		map& operator=(const map& x) {
+		map& operator=(const map& x) 
+		{
 			_tree.clear();
 			_tree.insert(x._tree.begin(), x._tree.end());
 			return(*this);
@@ -145,10 +145,10 @@ namespace ft {
 
 		pair<iterator,bool>	insert (const value_type& val) { return _tree.insert(val) ; }
 
-		iterator	insert (iterator position, const value_type& val) { return _tree.insert(position, val); }
+		iterator			insert (iterator position, const value_type& val) { return _tree.insert(position, val); }
 
 		template <class InputIterator>
-  		void		insert (InputIterator first, InputIterator last,
+  		void				insert (InputIterator first, InputIterator last,
 		typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type* = NULL) {
 			return _tree.insert(first, last); 
 		}

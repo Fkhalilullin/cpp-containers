@@ -1,8 +1,8 @@
 #ifndef BIDIRECTIONAL_ITERATOR_HPP
 #define BIDIRECTIONAL_ITERATOR_HPP
 
-#include "tree.hpp"
 #include <iterator>
+#include "../utility/tree.hpp"
 #include "is_input_iterator_tag.hpp"
 
 namespace ft {

@@ -1,15 +1,15 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include "swap.hpp"
-#include "random_access_iterator.hpp"
-#include "lexicographical_compare.hpp"
-#include "equal.hpp"
-#include "reverse_iterator.hpp"
-#include "enable_if.hpp"
 #include <exception>
 #include <iostream>
 #include <iterator>
+#include "../utility/swap.hpp"
+#include "../utility/lexicographical_compare.hpp"
+#include "../utility/equal.hpp"
+#include "../utility/enable_if.hpp"
+#include "../iterator/reverse_iterator.hpp"
+#include "../iterator/random_access_iterator.hpp"
 
 namespace ft {
 	template < class T, class Alloc = std::allocator<T> >
