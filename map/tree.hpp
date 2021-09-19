@@ -261,14 +261,13 @@ namespace ft {
 		const_iterator	find(const value_type &value) const {
 			Node<value_type> *tmp = _move(value);
 
-			if(!_comp(*tmp->value, value) && !_comp(value, *tmp->value))
+			if(!_compare(*tmp->value, value) && !_compare(value, *tmp->value))
 				return(const_iterator(tmp));
 			return(end());
 		}
 
 		size_type 		count(const value_type &value) const {
-			iterator it = find(value);
-			if(it == end())
+			if (this->find(value) == this->end())
 				return (0);
 			return (1);
 		}
@@ -280,17 +279,15 @@ namespace ft {
 		const_iterator	upper_bound(const value_type &value) const { return const_iterator(_upper_bound(value, _root)); }
 
 		pair<const_iterator,const_iterator> equal_range(const value_type &value) const {
-			const_iterator it = const_iterator(lower_bound(value));
-			const_iterator it2 = const_iterator(upper_bound(value));
-
-			return (ft::make_pair<const_iterator, const_iterator>(it, it2));
+			if (this->lower_bound(value) == this->end() && this->upper_bound(value) == this->end())
+				return (ft::make_pair<const_iterator, const_iterator>(this->begin(), this->begin()));
+			return (ft::make_pair<const_iterator, const_iterator>(this->lower_bound(value), this->upper_bound(value)));
 		}
 
 		pair<iterator,iterator>             equal_range(const value_type &value) {
-			const_iterator it = iterator(lower_bound(value));
-			const_iterator it2 = iterator(upper_bound(value));
-
-			return (ft::make_pair<iterator, iterator>(it, it2));
+			if (this->lower_bound(value) == this->end() && this->upper_bound(value) == this->end())
+				return (ft::make_pair<iterator, iterator>(this->begin(), this->begin()));
+			return (ft::make_pair<iterator, iterator>(this->lower_bound(value), this->upper_bound(value)));
 		}
 
 		// Allocator:

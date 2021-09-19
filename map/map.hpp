@@ -178,7 +178,7 @@ namespace ft {
 		iterator		find (const key_type& k) { return _tree.find(ft::make_pair(k, mapped_type())); }
 		const_iterator	find (const key_type& k) const { return _tree.find(ft::make_pair(k, mapped_type())); }
 
-		size_type count (const key_type& k) const { return _tree.count(ft::make_pair(k, mapped_type())); }
+		size_type 		count (const key_type& k) const { return _tree.count(ft::make_pair(k, mapped_type())); }
 
 		iterator		lower_bound (const key_type& k) { return _tree.lower_bound(ft::make_pair(k, mapped_type())); }
 		const_iterator	lower_bound (const key_type& k) const { return _tree.lower_bound(ft::make_pair(k, mapped_type())); }

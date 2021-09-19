@@ -5,5 +5,7 @@ void testMapIterator();
 void testMapCapacity();
 void testMapElementAccess();
 void testMapModifiers();
+void testObserversModifiers();
+void testOperationsModifiers();
 
 #endif

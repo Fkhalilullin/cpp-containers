@@ -45,7 +45,7 @@ namespace ft {
 		reverse_iterator&	operator+=( difference_type n ) { return reverse_iterator(this->_it -= n); }
 		reverse_iterator&	operator-=( difference_type n ) { return reverse_iterator(this->_it += n); }
 
-		iterator_type getIterator() const { return this->_it; }
+		iterator_type		getIterator() const { return this->_it; }
 
 	private:
 		iterator_type _it;

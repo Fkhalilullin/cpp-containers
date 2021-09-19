@@ -67,6 +67,14 @@ void mapTest() {
 	std::cout << RED << "<Modifiers>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testMapModifiers();
+
+	std::cout << RED << "<Observers>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testObserversModifiers();
+
+	std::cout << RED << "<Operations>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testOperationsModifiers();
 }
 
 int main() {
