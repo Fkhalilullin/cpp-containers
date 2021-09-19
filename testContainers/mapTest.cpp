@@ -403,8 +403,7 @@ void testOperationsModifiers()
 	std::pair<std::map<int,int>::iterator, std::map<int,int>::iterator> std_ret = std_map.equal_range(3);
 	std::cout << "[" << ft_ret.first->first << "]" << " " << std_ret.second->second << std::endl;
 	/////////////////////////////////////////////////////////////////////////
-	std::cout << RED << LINE << RESET << std::endl;
-	std::cout << MAGENTA<< LINE << std::endl << std::endl;
+	std::cout << RED << LINE << RESET << std::endl << std::endl;
 }
 
 void testMapSpeed() {
@@ -414,7 +413,7 @@ void testMapSpeed() {
 		time_t start, end;
 
 		time(&start);
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 10000000; i++) {
 			ft_map.insert(ft::pair<int, int>(i, i));
 		}
 		time(&end);
@@ -428,7 +427,7 @@ void testMapSpeed() {
 		time_t start, end;
 
 		time(&start);
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 10000000; i++) {
 			std_map.insert(std::pair<int, int>(i, i));
 		}
 		time(&end);
@@ -442,11 +441,11 @@ void testMapSpeed() {
 		ft::map<int, int> ft_map;
 		time_t start, end;
 
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 10000000; i++) {
 			ft_map.insert(ft::pair<int, int>(i, i));
 		}
 		time(&start);
-		for (int i = 1000000; i > 0; i--) {
+		for (int i = 10000000; i > 0; i--) {
 			ft_map.erase(i);
 		}
 		time(&end);
@@ -459,20 +458,49 @@ void testMapSpeed() {
 		std::map<int, int> std_map;
 		time_t start, end;
 
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 10000000; i++) {
 			std_map.insert(std::pair<int, int>(i, i));
 		}
 		time(&start);
-		for (int i = 1000000; i > 0; i--) {
+		for (int i = 10000000; i > 0; i--) {
 			std_map.erase(i);
 		}
 		time(&end);
 
 		double seconds = difftime(end, start);
 		std::cout << GREEN << "STD map erase: " << RESET; 
+		std::cout << seconds << " sec" << std::endl << std::endl;
+	}
+	/////////////////////////////////////////////////////////////////////////
+	{
+		ft::map<int, int> ft_map;
+		time_t start, end;
+
+		for (int i = 0; i < 10000000; i++) {
+			ft_map.insert(ft::pair<int, int>(i, i));
+		}
+		time(&start);
+		ft_map.find(10000000);
+		time(&end);
+		double seconds = difftime(end, start);
+		std::cout << GREEN << "FT  map find: " << RESET; 
 		std::cout << seconds << " sec" << std::endl;
 	}
 	/////////////////////////////////////////////////////////////////////////
+	{
+		std::map<int, int> std_map;
+		time_t start, end;
+
+		for (int i = 0; i < 10000000; i++) {
+			std_map.insert(std::pair<int, int>(i, i));
+		}
+		time(&start);
+		std_map.find(10000000);
+		time(&end);
+		double seconds = difftime(end, start);
+		std::cout << GREEN << "FT  map find: " << RESET; 
+		std::cout << seconds << " sec" << std::endl;
+	}
 	std::cout << RED << LINE << RESET << std::endl;
 	std::cout << MAGENTA<< LINE << std::endl << std::endl;
 }
