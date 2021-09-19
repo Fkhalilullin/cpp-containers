@@ -12,13 +12,8 @@
 #include "map/map.hpp"
 #include "testContainers/mapTest.hpp"
 
-#define RESET	"\033[0m"
-#define GREEN	"\033[32m"
-#define RED		"\033[31m"
-#define MAGENTA "\033[35m"
-#define LINE	"-----------------------------------------------"
-
-void vectorTest() {
+void vectorTest() 
+{
 	std::cout << MAGENTA << "[VECTOR TEST]" << RESET << std::endl;
 	std::cout << MAGENTA << LINE  << std::endl;
 
@@ -34,13 +29,17 @@ void vectorTest() {
 	std::cout << RED << LINE << RESET << std::endl;
 	testVectorElementAccess();
 
-
 	std::cout << RED << "<Modifiers>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testVectorModifiers();
+
+	std::cout << RED << "<Speed>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testVectorSpeed();
 }
 
-void stackTest() {
+void stackTest() 
+{
 	std::cout << MAGENTA << "[STACK TEST]" << RESET << std::endl;
 	std::cout << MAGENTA << LINE  << std::endl;
 	std::cout << RED << "<Member Function Test>" << RESET << std::endl;
@@ -48,7 +47,8 @@ void stackTest() {
 	testMemberFunction();
 }
 
-void mapTest() {
+void mapTest() 
+{
 	std::cout << MAGENTA << "[MAP TEST]" << RESET << std::endl;
 	std::cout << MAGENTA << LINE  << std::endl;
 
@@ -77,7 +77,8 @@ void mapTest() {
 	testOperationsModifiers();
 }
 
-int main() {
+int main() 
+{
 	srand(time(NULL));
 	std::string cont;
 

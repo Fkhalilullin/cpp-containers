@@ -4,6 +4,7 @@
 #include "../vector/vector.hpp"
 
 namespace ft {
+	
 	template< class T, class Cont = ft::vector<T> >
 	class stack {
 	public:
@@ -27,7 +28,7 @@ namespace ft {
 		
 		void 				pop() {return _cont.pop_back(); }
 
-		container_type getCont() { return this->_cont; }
+		container_type		getCont() { return this->_cont; }
 		
 		/////////////////////////////////////////////////////////////
 	private: 
