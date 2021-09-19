@@ -42,19 +42,28 @@ namespace ft {
 		typedef Key																						key_type;
 		typedef T																						mapped_type;
 		typedef typename ft::pair<const key_type, mapped_type>											value_type;
-		typedef Compare																					key_compare;
 
-		class value_compare : public std::binary_function<value_type, value_type, bool> {
+	private:
+
+		class value_compare
+		{  
 			friend class map;
-		public:
-			bool operator() (const value_type& x, const value_type& y) const {
-				return comp(x.first, y.first);
-			}
 		protected:
-			value_compare(key_compare pr) : comp(pr) {}
-			key_compare comp;
+			Compare _comp;
+			value_compare(Compare c) : _comp(c) {}
+
+		public:
+			typedef bool result_type;
+			typedef value_type first_argument_type;
+			typedef value_type second_argument_type;
+			bool operator()(const value_type& x, const value_type& y) const {
+				return _comp(x.first, y.first);
+			}
 		};
 
+	public:
+
+		typedef Compare																					key_compare;
 		typedef Alloc																					allocator_type;
 		typedef typename allocator_type::reference														reference;
 		typedef typename allocator_type::const_reference												const_reference;
@@ -134,12 +143,15 @@ namespace ft {
 
 		//////////////////////////MODIFIERS//////////////////////////
 
-		pair<iterator,bool>	insert (const value_type& val) { return(_tree.insert(val)); }
+		pair<iterator,bool>	insert (const value_type& val) { return _tree.insert(val) ; }
 
 		iterator	insert (iterator position, const value_type& val) { return _tree.insert(position, val); }
 
 		template <class InputIterator>
-  		void		insert (InputIterator first, InputIterator last) { return _tree.insert(first, last); }
+  		void		insert (InputIterator first, InputIterator last,
+		typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type* = NULL) {
+			return _tree.insert(first, last); 
+		}
 
 		void		erase (iterator position) { _tree.erase(position); }
 

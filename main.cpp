@@ -55,6 +55,18 @@ void mapTest() {
 	std::cout << RED << "<Iterator Test>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testMapIterator();
+
+	std::cout << RED << "<Capacity Test>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testMapCapacity();
+
+	std::cout << RED << "<Element Access>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testMapElementAccess();
+
+	std::cout << RED << "<Modifiers>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testMapModifiers();
 }
 
 int main() {

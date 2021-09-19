@@ -31,8 +31,8 @@ namespace ft {
 
 		iterator_type		base() const { return (_it); }
 		
-		reference 			operator*() { return *this->_it; }
-		pointer 			operator->() {return this->_it; }
+		reference 			operator*() { return *(--base()); }
+		pointer 			operator->() {return &(operator*()); }
 
 		reference 			operator[]( difference_type n ) const { return this->_it[n]; };
 		
@@ -59,7 +59,7 @@ namespace ft {
 
 	template< class Iterator1, class Iterator2 >
 	bool operator!=( const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs ) {
-		return lhs != rhs;
+		return lhs.base() != rhs.base();
 	}
 
 	template< class Iterator1, class Iterator2 >

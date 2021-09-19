@@ -27,7 +27,7 @@ namespace ft {
 	
 	public:
 	
-		bidirectional_iterator() : _point (NULL) {}
+		bidirectional_iterator() : _point(NULL) {}
 
 		~bidirectional_iterator() {}
 

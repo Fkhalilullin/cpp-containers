@@ -33,8 +33,7 @@ void testVectorIterator() {
 	for (;std_it < std_vec.end(); ++std_it) {
 		std::cout << *std_it << " ";
 	}
-	std::cout << std::endl << RED << LINE << RESET << std::endl;
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 }
 
 void testVectorModifiers() {

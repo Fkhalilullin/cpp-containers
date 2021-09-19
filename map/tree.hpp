@@ -181,12 +181,12 @@ namespace ft {
 
 		iterator insert(iterator position, const value_type &val) {
 			(void)position;
-			return(iterator(val).first);
+			return insert(val).first;
 		}
 
 		template <typename InputIterator>
-		void insert(InputIterator first, InputIterator last) 
-		// typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type*) 
+		void insert(InputIterator first, InputIterator last,
+		typename ft::enable_if<ft::is_input_iterator_tag<typename InputIterator::iterator_category>::value>::type* = NULL) 
 		{
 			for(; first != last; ++first)
 				insert(*first);
