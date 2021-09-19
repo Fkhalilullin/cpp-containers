@@ -6,8 +6,8 @@
 void testSetIterator() 
 {
     // int val;
-    std::set<int, int> std_set;
-    ft::set<int, int> ft_set;
+    // std::set<int, int> std_set;
+    // ft::set<int, int> ft_set;
 
     // std::cout << GREEN << "set elem: " << RESET;
     // for (int i = 0; i <= 10; i++) {
