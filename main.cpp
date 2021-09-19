@@ -12,6 +12,9 @@
 #include "map/map.hpp"
 #include "testContainers/mapTest.hpp"
 
+#include "set/set.hpp"
+#include "testContainers/setTest.hpp"
+
 void vectorTest() 
 {
 	std::cout << MAGENTA << "[VECTOR TEST]" << RESET << std::endl;
@@ -75,10 +78,44 @@ void mapTest()
 	std::cout << RED << "<Operations>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testOperationsModifiers();
-	
+
 	std::cout << RED << "<Speed>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testMapSpeed();
+}
+
+void setTest() 
+{
+	std::cout << MAGENTA << "[SET TEST]" << RESET << std::endl;
+	std::cout << MAGENTA << LINE  << std::endl;
+
+	std::cout << RED << "<Iterator Test>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testSetIterator();
+
+	std::cout << RED << "<Capacity Test>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testSetCapacity();
+
+	std::cout << RED << "<Element Access>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testSetElementAccess();
+
+	std::cout << RED << "<Modifiers>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testSetModifiers();
+
+	std::cout << RED << "<Observers>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testSetObserversModifiers();
+
+	std::cout << RED << "<Operations>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testSetOperationsModifiers();
+
+	std::cout << RED << "<Speed>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testSetSpeed();
 }
 
 int main() 
@@ -87,7 +124,7 @@ int main()
 	std::string cont;
 
 	while (1) {
-		std::cout << MAGENTA << "Input Containers for testing [vector, stack, map]: " << RESET;
+		std::cout << MAGENTA << "Input Containers for testing [vector, stack, map, set]: " << RESET;
 		std::getline(std::cin, cont);
 		if (cont == "vector") 
 			vectorTest();
@@ -95,6 +132,8 @@ int main()
 			stackTest();
 		else if (cont == "map") 
 			mapTest();
+		else if (cont == "set")
+			setTest();
 		else
 			std::cout << "Wrong Input" << std::endl;
 	}
