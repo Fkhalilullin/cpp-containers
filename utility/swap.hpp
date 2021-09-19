@@ -1,7 +1,8 @@
 #ifndef SWAP_HPP
 #define SWAP_HPP
 
-namespace ft {
+namespace ft 
+{
 	template <typename T>
 	void swap(T &a, T &b)
 	{

@@ -5,12 +5,14 @@
 #include "../utility/tree.hpp"
 #include "is_input_iterator_tag.hpp"
 
-namespace ft {
+namespace ft 
+{
 	template <typename T>
 	struct Node;
 }
 
-namespace ft {
+namespace ft 
+{
 	
 	template<typename T, typename Pointer, typename Reference>
 	class bidirectional_iterator {

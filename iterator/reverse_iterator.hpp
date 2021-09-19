@@ -4,7 +4,8 @@
 #include <iterator>
 #include "iterator_traits.hpp"
 
-namespace ft {
+namespace ft 
+{
 	template <class Iterator>
 	class reverse_iterator : public std::iterator<std::random_access_iterator_tag, Iterator> {
 	public:
@@ -84,13 +85,13 @@ namespace ft {
 
 	template< class Iter > 
 	reverse_iterator<Iter> operator+( typename reverse_iterator<Iter>::difference_type n, 
-										const reverse_iterator<Iter>& it ) {
+	const reverse_iterator<Iter>& it ) {
 		return reverse_iterator<Iter>(it - n);
 	}
 
 	template< class Iter > 
 	reverse_iterator<Iter> operator-( typename reverse_iterator<Iter>::difference_type n, 
-										const reverse_iterator<Iter>& it ) {
+	const reverse_iterator<Iter>& it ) {
 		return reverse_iterator<Iter>(it + n);
 	}
 }

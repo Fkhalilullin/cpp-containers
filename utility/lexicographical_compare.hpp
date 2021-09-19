@@ -1,7 +1,8 @@
 #ifndef LEXICOGRAPHICAL_COMPARE_HPP
 #define LEXICOGRAPHICAL_COMPARE_HPP
 
-namespace ft {
+namespace ft 
+{
 	template <class InputIterator>
 	bool	lexicographical_compare(InputIterator first1, InputIterator last1,
 								   InputIterator first2, InputIterator last2) {

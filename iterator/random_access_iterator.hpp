@@ -3,7 +3,8 @@
 
 #include <iterator>
 
-namespace ft {
+namespace ft 
+{
 	template <class T, class P, class R>
 	class random_access_iterator : public std::iterator<std::random_access_iterator_tag, T> {
 	public:

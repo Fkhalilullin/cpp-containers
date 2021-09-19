@@ -1,7 +1,8 @@
 #ifndef EQUAL_HPP
 #define EQUAL_HPP
 
-namespace ft {
+namespace ft
+{
 	template <class InputIterator>
 	bool equal ( InputIterator first1, InputIterator last1, InputIterator first2 )
 	{

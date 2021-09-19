@@ -7,7 +7,6 @@ namespace ft
 	template<bool Cond, class T = void> struct enable_if {};
 	template<class T> struct enable_if<true, T> { typedef T type; };
 
-
 	template <class T>
 	struct is_integral
 	{
@@ -104,6 +103,6 @@ namespace ft
 		static const bool value = true;
 	};
 
-} // ft
+}
 
-#endif // TYPE_TRAITS_HPP
+#endif
