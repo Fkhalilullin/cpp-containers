@@ -7,6 +7,7 @@ void testMapElementAccess();
 void testMapModifiers();
 void testObserversModifiers();
 void testOperationsModifiers();
+void testMapSpeed();
 
 #define RESET	"\033[0m"
 #define GREEN	"\033[32m"

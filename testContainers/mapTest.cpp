@@ -3,7 +3,8 @@
 #include "../map/map.hpp"
 #include "mapTest.hpp"
 
-void testMapIterator() {
+void testMapIterator() 
+{
     int val;
     std::map<int, int> std_map;
     ft::map<int, int> ft_map;
@@ -44,7 +45,8 @@ void testMapIterator() {
 	std::cout << std::endl;
 }
 
-void testMapCapacity() {
+void testMapCapacity() 
+{
     int val;
     std::map<int, int> std_map;
     ft::map<int, int> ft_map;
@@ -73,7 +75,8 @@ void testMapCapacity() {
 	std::cout << RED << LINE << RESET << std::endl << std::endl;
 }
 
-void testMapElementAccess() {
+void testMapElementAccess() 
+{
 	int val;
 	std::map<int, int> std_map;
 	ft::map<int, int> ft_map;
@@ -123,7 +126,8 @@ void testMapElementAccess() {
 	std::cout << std::endl;
 }
 
-void testMapModifiers() {
+void testMapModifiers() 
+{
 	int val;
 	std::map<int, int> std_map;
 	ft::map<int, int> ft_map;
@@ -274,7 +278,8 @@ void testMapModifiers() {
 	std::cout << std::endl << RED << LINE << RESET << std::endl << std::endl;
 }
 
-void testObserversModifiers() {
+void testObserversModifiers() 
+{
 
 	{
 		ft::map<char,int> ft_map;
@@ -342,7 +347,8 @@ void testObserversModifiers() {
 	std::cout << RED << LINE << RESET << std::endl << std::endl;
 }
 
-void testOperationsModifiers() {
+void testOperationsModifiers() 
+{
 	int val;
 	std::map<int, int> std_map;
 	ft::map<int, int> ft_map;
@@ -396,6 +402,76 @@ void testOperationsModifiers() {
 	std::cout << GREEN << "STD map equal_range: " << RESET;
 	std::pair<std::map<int,int>::iterator, std::map<int,int>::iterator> std_ret = std_map.equal_range(3);
 	std::cout << "[" << ft_ret.first->first << "]" << " " << std_ret.second->second << std::endl;
+	/////////////////////////////////////////////////////////////////////////
+	std::cout << RED << LINE << RESET << std::endl;
+	std::cout << MAGENTA<< LINE << std::endl << std::endl;
+}
+
+void testMapSpeed() {
+		/////////////////////////////////////////////////////////////////////////
+	{
+		ft::map<int, int> ft_map;
+		time_t start, end;
+
+		time(&start);
+		for (int i = 0; i < 1000000; i++) {
+			ft_map.insert(ft::pair<int, int>(i, i));
+		}
+		time(&end);
+		double seconds = difftime(end, start);
+		std::cout << GREEN << "FT  map insert: " << RESET; 
+		std::cout << seconds << " sec" << std::endl;
+	}
+	/////////////////////////////////////////////////////////////////////////
+	{
+		std::map<int, int> std_map;
+		time_t start, end;
+
+		time(&start);
+		for (int i = 0; i < 1000000; i++) {
+			std_map.insert(std::pair<int, int>(i, i));
+		}
+		time(&end);
+
+		double seconds = difftime(end, start);
+		std::cout << GREEN << "STD map insert: " << RESET; 
+		std::cout << seconds << " sec" << std::endl<<std::endl;
+	}
+	/////////////////////////////////////////////////////////////////////////
+	{
+		ft::map<int, int> ft_map;
+		time_t start, end;
+
+		for (int i = 0; i < 1000000; i++) {
+			ft_map.insert(ft::pair<int, int>(i, i));
+		}
+		time(&start);
+		for (int i = 1000000; i > 0; i--) {
+			ft_map.erase(i);
+		}
+		time(&end);
+		double seconds = difftime(end, start);
+		std::cout << GREEN << "FT  map erase: " << RESET; 
+		std::cout << seconds << " sec" << std::endl;
+	}
+	/////////////////////////////////////////////////////////////////////////
+	{
+		std::map<int, int> std_map;
+		time_t start, end;
+
+		for (int i = 0; i < 1000000; i++) {
+			std_map.insert(std::pair<int, int>(i, i));
+		}
+		time(&start);
+		for (int i = 1000000; i > 0; i--) {
+			std_map.erase(i);
+		}
+		time(&end);
+
+		double seconds = difftime(end, start);
+		std::cout << GREEN << "STD map erase: " << RESET; 
+		std::cout << seconds << " sec" << std::endl;
+	}
 	/////////////////////////////////////////////////////////////////////////
 	std::cout << RED << LINE << RESET << std::endl;
 	std::cout << MAGENTA<< LINE << std::endl << std::endl;

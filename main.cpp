@@ -75,6 +75,10 @@ void mapTest()
 	std::cout << RED << "<Operations>" << RESET << std::endl;
 	std::cout << RED << LINE << RESET << std::endl;
 	testOperationsModifiers();
+	
+	std::cout << RED << "<Speed>" << RESET << std::endl;
+	std::cout << RED << LINE << RESET << std::endl;
+	testMapSpeed();
 }
 
 int main() 
